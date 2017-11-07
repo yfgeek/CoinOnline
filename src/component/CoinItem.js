@@ -71,7 +71,7 @@ class CoinList extends Component {
 
         return (
             <View>
-                <TouchableHighlight style={{backgroundColor: '#f3f3f3', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={ () =>{
+                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={ () =>{
                     this.setState({
                         dataSource: {
                             base: this.state.dataSource.target,
