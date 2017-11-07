@@ -6,4 +6,4 @@
 
 # 截图
 
-<img src="snap.jpg" width="350px" />
+<img src="snap.png" width="350px" />

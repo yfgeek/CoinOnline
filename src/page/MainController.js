@@ -36,7 +36,6 @@ class MainController extends Component {
                                     let  price = Math.random().toFixed(2);
                                     dispatch(addCoin(test[num],price));
                                 }, 1000 * (i+1));
-
                             })(i)
                         }
 
