@@ -6,5 +6,4 @@
 
 # 截图
 
-![](snap.png)
-
+<img src="snap.png" width="350px" />
