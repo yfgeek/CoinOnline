@@ -10,7 +10,7 @@ import {
 import CoinList from '../component/CoinList'
 import Header from '../component/HeaderMain'
 
-var contentHeight = Dimensions.get('window').height-250;
+var contentHeight = Dimensions.get('window').height-300;
 
 class MainController extends Component {
     static navigationOptions  ={
