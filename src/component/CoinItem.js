@@ -10,6 +10,10 @@ import {
 } from 'react-native'
 
 import CoinIcon from "./CoinIcon";
+import {pushBalance} from "../actions/actions";
+import { connect } from 'react-redux';
+
+
 class CoinList extends Component {
 
 
@@ -25,10 +29,12 @@ class CoinList extends Component {
     }
 
     componentDidMount() {
+
         this.fetchData();
     }
 
     fetchData() {
+        let { dispatch } = this.props;
         fetch("https://api.cryptonator.com/api/ticker/"+this.state.cuy, {
             method: 'GET'
         })
@@ -42,6 +48,8 @@ class CoinList extends Component {
                         dataSource: responseData.ticker,
                         loaded: true,
                     });
+                    let price = responseData.ticker.price*this.props.balance;
+                    dispatch(pushBalance(price));
                 }
             )
             .catch((error) => {
@@ -76,10 +84,10 @@ class CoinList extends Component {
                     <View style={styles.cell}>
                         <CoinIcon style={styles.thumbnai} cuy={this.state.dataSource.base} reversed={this.state.reversed}/>
                         <View style={styles.rightContainer}>
-                            <Text style={{fontSize:17}} numberOfLines={2}>{this.state.dataSource.price}</Text>
+                            <Text style={{fontSize:17}} numberOfLines={2}>{(this.state.dataSource.price*this.props.balance).toFixed(4)}</Text>
                             <View style={{marginTop: 8, flex:1, flexDirection:'row', alignItems:'stretch', justifyContent: 'space-between'}}>
                                 <Text style={styles.label} numberOfLines={1}>{this.state.dataSource.target}</Text>
-                                <Text style={styles.label}>1 {this.state.dataSource.base}</Text>
+                                <Text style={styles.label}>{this.props.balance} {this.state.dataSource.base}</Text>
                             </View>
                         </View>
                     </View>
@@ -112,5 +120,9 @@ var styles = StyleSheet.create({
         fontSize: 13
     }
 });
-
-export default CoinList
+function select(state) {
+    return {
+        visibleBalance: state.allBalance,
+    }
+}
+export default connect(select)(CoinList)

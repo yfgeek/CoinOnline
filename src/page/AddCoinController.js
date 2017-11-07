@@ -36,7 +36,6 @@ class AddCoinController extends Component {
 
     constructor(props) {
         super(props);
-
         this.state={
             dataSource:null,
             loaded: false,
