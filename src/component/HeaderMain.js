@@ -3,6 +3,7 @@ import {
     View,
     Text, ImageBackground
 } from 'react-native'
+import {addCoin} from "../actions/actions";
 class Header extends Component {
 
     constructor(props) {
@@ -33,11 +34,10 @@ class Header extends Component {
                         总资产(估计)
                     </Text>
                     <View style={{borderColor: '#ddd',backgroundColor:'transparent',borderWidth: 0.8, alignItems:'center', overflow: 'hidden', width: 32, height: 32,borderRadius: 10, marginRight: 20, alignSelf: 'flex-end' }} >
-                        <Text style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}}
-                            //   onPress={() =>
-                            // this.props.nav('AddCoinController')
-                              onPress = { (e) => this.handleClick(e)
-                              }>
+                        <Text
+                            style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}}
+
+                            onPress = { (e) => this.props.nav('AddCoinController') }>
                             +
                         </Text>
                     </View>
@@ -47,11 +47,6 @@ class Header extends Component {
             </View>
 
         )
-    }
-
-    handleClick(e) {
-            let a  = 'btc-gbp';
-            this.props.onAddCoin(a);
     }
 }
 

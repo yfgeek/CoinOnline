@@ -12,7 +12,7 @@ class CoinIcon extends Component {
 
     getImage(cuy){
         cuy = cuy.toLowerCase() || "btc";
-        const prefix= 'https://raw.githubusercontent.com/yfgeek/yfgeek.github.io/source/public/img/icon/';
+        const prefix= 'https://blog.yfgeek.com/img/icon/';
         if(this.list.indexOf(cuy)>0){
             return prefix+ cuy + ".png";
         }

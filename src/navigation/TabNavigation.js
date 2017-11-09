@@ -4,7 +4,7 @@ import MainController from '../page/MainController'
 import SettingController from '../page/SettingController'
 import * as React from "react";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AddCoinController from "../page/AddCoinController";
+import AddCoinController from "../page/SelectCoinController";
 import MyStackNavigation from './MyStackNavigation';
 
 const RootTabs = TabNavigator({
