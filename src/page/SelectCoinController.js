@@ -18,7 +18,7 @@ class SelectCoinController extends Component {
         headerTitle: '添加虚拟货币',
         headerBackTitle: '返回',
         headerStyle:{
-            backgroundColor: '#364c62',
+            backgroundColor: '#1987fb',
         },
         headerTitleStyle: {
             color: '#ffffff',

@@ -19,34 +19,30 @@ class MainController extends Component {
     };
     constructor(props) {
         super(props);
-        this.state={
-            isEmpty: true,
-        }
-
     }
     render() {
         const {navigate} =this.props.navigation;
         const { dispatch, visibleTodos, visibilityFilter } = this.props;
+        let showbalance = this.props.visibleBalance.reduce((pre, value)=>pre + parseFloat(value)).toFixed(2);
         return (
             <View>
                 <StatusBar barStyle="light-content"/>
                 <Header
                     nav={ navigate }
-                    balance={this.props.visibleBalance.reduce((pre, value)=>pre + parseFloat(value)).toFixed(2)}
-                    isEmpty = {this.state.isEmpty}
-                    onAddCoin={ (cuy,balance) => {
-                        dispatch(addCoin(cuy, balance));
-                        // let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
-                        // for(let i=0; i<test.length;i++){
-                        //     ((num)=>{
-                        //         setTimeout(function(){
-                        //             let  price = Math.random().toFixed(2);
-                        //             dispatch(addCoin(test[num],price));
-                        //         }, 1000 * (i+1));
-                        //     })(i)
-                        // }
-
-                    }}
+                    balance={showbalance}
+                    // onAddCoin={ (cuy,balance) => {
+                    //     dispatch(addCoin(cuy, balance));
+                    //     // let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
+                    //     // for(let i=0; i<test.length;i++){
+                    //     //     ((num)=>{
+                    //     //         setTimeout(function(){
+                    //     //             let  price = Math.random().toFixed(2);
+                    //     //             dispatch(addCoin(test[num],price));
+                    //     //         }, 1000 * (i+1));
+                    //     //     })(i)
+                    //     // }
+                    //
+                    // }}
                 />
                 <ScrollView style={{height: contentHeight, backgroundColor: '#f1f1f1'}}>
 

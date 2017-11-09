@@ -1,11 +1,14 @@
 import React, { Component, } from 'react'
 import {
     View,
+    Text,
     StyleSheet,
     Dimensions,
     Platform,
 
 } from 'react-native'
+import {connect} from "react-redux";
+import {addCoin} from "../actions/actions";
 
 var contentHeight = Dimensions.get('window').height-500;
 var contentWidth = Dimensions.get('window').width;
@@ -35,7 +38,7 @@ class AddCoinController extends Component {
             layout: 'list',
             text: ''
 
-        }
+        };
     }
 
 
@@ -44,9 +47,16 @@ class AddCoinController extends Component {
 
     render() {
         return(
-            <View></View>
+            <View>
+                <Text onPress={(e) => this.addToCoin(e)}>点我添加一个</Text>
+            </View>
             )
 
+    }
+
+    addToCoin(e){
+        let { dispatch } = this.props;
+        dispatch(addCoin("btc-gbp",1));
     }
 }
 
@@ -64,5 +74,9 @@ const styles = StyleSheet.create({
     }
 
 });
-
-export default AddCoinController
+function select(state) {
+    return {
+        visibleCoins: state.coins
+    }
+}
+export default connect(select)(AddCoinController)
