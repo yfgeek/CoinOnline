@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 import CoinIcon from "./CoinIcon";
-import {pushBalance} from "../actions/actions";
+import {deleteBalance, deleteCoin, pushBalance} from "../actions/actions";
 import { connect } from 'react-redux';
 
 
@@ -26,6 +26,8 @@ class CoinList extends Component {
             spinkitSize: 50,
             reversed: false,
         };
+        this.dispatch  = this.props.dispatch;
+
     }
 
     componentDidMount() {
@@ -34,22 +36,21 @@ class CoinList extends Component {
     }
 
     fetchData() {
-        let { dispatch } = this.props;
         fetch("https://api.cryptonator.com/api/ticker/"+this.state.cuy, {
             method: 'GET'
         })
             .then((response) => response.json())
             .then(
                 (responseData) => {
-                    if(responseData.ticker.success == "false"){
+                    if(responseData.ticker.success === "false"){
                         return Promise.reject(new Error("this promise is rejected"));
                     }
                     this.setState({
                         dataSource: responseData.ticker,
                         loaded: true,
                     });
-                    let price = responseData.ticker.price*this.props.balance;
-                    dispatch(pushBalance(price));
+                    let price = responseData.ticker.price * this.props.numbers;
+                    this.dispatch(pushBalance(price));
                 }
             )
             .catch((error) => {
@@ -63,7 +64,21 @@ class CoinList extends Component {
             <View />
         );
     }
+    reverse(){
+            this.setState({
+                              dataSource: {
+                                  base: this.state.dataSource.target,
+            target: this.state.dataSource.base,
+            price:  1 / this.state.dataSource.price,
+        },
+        reversed: true,
+        });
+    }
 
+    deleteItem(key){
+        this.dispatch(deleteCoin(key));
+        this.dispatch(deleteBalance(key));
+    }
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -71,23 +86,14 @@ class CoinList extends Component {
 
         return (
             <View>
-                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={ () =>{
-                    this.setState({
-                        dataSource: {
-                            base: this.state.dataSource.target,
-                            target: this.state.dataSource.base,
-                            price:  1 / this.state.dataSource.price,
-                        },
-                        reversed: true,
-                    })
-                } } >
+                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={(e) => this.deleteItem(this.props.itemIndex) } >
                     <View style={styles.cell}>
                         <CoinIcon style={styles.thumbnai} cuy={this.state.dataSource.base} reversed={this.state.reversed}/>
                         <View style={styles.rightContainer}>
-                            <Text style={{fontSize:17}} numberOfLines={2}>{(this.state.dataSource.price*this.props.balance).toFixed(4)}</Text>
+                            <Text style={{fontSize:17}} numberOfLines={2}>{(this.state.dataSource.price*this.props.numbers).toFixed(4)}</Text>
                             <View style={{marginTop: 8, flex:1, flexDirection:'row', alignItems:'stretch', justifyContent: 'space-between'}}>
                                 <Text style={styles.label} numberOfLines={1}>{this.state.dataSource.target}</Text>
-                                <Text style={styles.label}>{this.props.balance} {this.state.dataSource.base}</Text>
+                                <Text style={styles.label}>{this.props.numbers} {this.state.dataSource.base}</Text>
                             </View>
                         </View>
                     </View>

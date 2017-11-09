@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux'
 
-import {ADD_COIN, EDIT_COIN, DELETE_COIN, VisibilityFilters, PUSH_BALANCE, SHOW_BALANCE} from '../actions/actions'
+import {
+    ADD_COIN, EDIT_COIN, DELETE_COIN, VisibilityFilters, PUSH_BALANCE, SHOW_BALANCE,
+    DELETE_BALANCE
+} from '../actions/actions'
 const { SHOW_ALL } = VisibilityFilters;
 
 function visibilityFilter(state = SHOW_ALL, action) {
@@ -10,17 +13,28 @@ function visibilityFilter(state = SHOW_ALL, action) {
     }
 }
 
-function balance(state = [0], action){
+function balance(state = [], action){
     switch(action.type){
         case PUSH_BALANCE:
-            return [...state,action.balance];
+            return [...state,
+                 {
+                        balance: action.balance,
+                        deleted: false
+                }
+            ];
         case SHOW_BALANCE:
             return 0;
             // return state.reduce((pre, value)=>pre + value);
-        case DELETE_COIN:
-            return state.splice(action.index,1);
+        case DELETE_BALANCE:
+            return [
+                ...state.slice(0, action.index),
+                Object.assign({}, state[action.index], {
+                    deleted: true
+                }),
+                ...state.slice(action.index + 1)
+            ];
         default:
-            return state;
+            return state.filter((item)=>!item.deleted);
 
     }
 }
@@ -32,7 +46,7 @@ function coins(state = [], action) {
                 ...state,
                 {
                     text: action.text,
-                    balance: action.balance,
+                    numbers: action.numbers,
                 }
             ];
         case EDIT_COIN:
@@ -44,9 +58,16 @@ function coins(state = [], action) {
                 ...state.slice(action.index + 1)
             ];
         case DELETE_COIN:
-            return state.splice(action.index,1);
+            console.warn(action.index);
+            return [
+                ...state.slice(0, action.index),
+                Object.assign({}, state[action.index], {
+                    deleted: true
+                }),
+                ...state.slice(action.index + 1)
+            ];
         default:
-            return state;
+            return state.filter((item)=>!item.deleted);
     }
 }
 

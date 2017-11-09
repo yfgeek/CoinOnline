@@ -101,7 +101,7 @@ class SelectCoinController extends Component {
                 refreshableMode="advanced" //basic or advanced
                 item={this.renderItem}  //this takes three params (item, index, separator)
                 numColumns={this.state.layout === 'list' ? 1 : 3} //to use grid layout, simply set gridColumn > 1
-                //----Extra Config----
+
                 displayDate
                 header={this.renderHeader}
                 paginationFetchingView={this.renderPaginationFetchingView}
@@ -111,11 +111,6 @@ class SelectCoinController extends Component {
                 refreshViewStyle={Platform.OS === 'ios' ? {height: 80, top: -80} : {height: 80}}
                 refreshViewHeight={80}
             />
-
-            // <ListView
-            //     dataSource={this.state.dataSource}
-            //     renderRow={(item)=>this._renderRow(item)}
-            // />
 
         )
     }

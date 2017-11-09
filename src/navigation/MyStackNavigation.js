@@ -15,4 +15,6 @@ const MyStackNavigation  = StackNavigator({
     AddCoinController: { screen: AddCoinController },
     MainController: { screen: MainController },
 });
+
+
 export default MyStackNavigation;

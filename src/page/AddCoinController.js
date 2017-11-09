@@ -55,28 +55,18 @@ class AddCoinController extends Component {
     }
 
     addToCoin(e){
-        let { dispatch } = this.props;
-        dispatch(addCoin("btc-gbp",1));
+        const { dispatch } = this.props;
+        let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
+        dispatch(addCoin(test[Math.floor(Math.random()*(test.length -1))],Math.random().toFixed(2)));
+        this.props.navigation.goBack();
+
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    list:{
-        height: 20,
-        lineHeight: 20,
-        padding:5,
-    }
-
-});
 function select(state) {
     return {
-        visibleCoins: state.coins
+        visibleCoins: state.coins,
+        visibleBalance: state.allBalance,
     }
 }
 export default connect(select)(AddCoinController)

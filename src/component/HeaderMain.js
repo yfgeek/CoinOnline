@@ -28,15 +28,14 @@ class Header extends Component {
                         <Text style={{ alignSelf: 'center',backgroundColor:'transparent' , color: '#fff', fontSize:48}}>
                             0.00
                         </Text>
-
                             <Text style={{alignSelf: 'center' , marginTop: 20,alignItems:'center', color: '#fff', fontSize:15,fontWeight: '100'}}>
                                 您尚未添加任何数字货币
                             </Text>
                         </View>
+
                         <View style={{borderColor: '#ddd',backgroundColor:'transparent',borderWidth: 0.8, alignItems:'center', overflow: 'hidden', height: 32,width: 100, borderRadius: 5, alignSelf: 'center' }} >
                             <Text
                                 style={{ lineHeight:12, color: '#fff', padding: 10, fontSize:14, fontWeight: '100'}}
-                                {...this.props}
                                 onPress = { (e) => this.props.nav('AddCoinController') }>
                                 点我添加
                             </Text>
@@ -64,7 +63,7 @@ class Header extends Component {
                 <View style={{flex: 4, marginTop:0, marginBottom: 15 ,overflow: 'hidden', justifyContent:'flex-end', flexDirection:'column',backgroundColor:'transparent'}}>
                     <Text style={{marginLeft: 30, marginRight: 2, alignSelf: 'flex-start',backgroundColor:'transparent' ,marginBottom: 3, marginTop: 3, color: '#fff', fontSize:32}}>
                         £{
-                        this.props.balance
+                        this.props.balance.toFixed(2)
                     }
                     </Text>
                     <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -74,7 +73,6 @@ class Header extends Component {
                     <View style={{borderColor: '#ddd',backgroundColor:'transparent',borderWidth: 0.8, alignItems:'center', overflow: 'hidden', width: 32, height: 32,borderRadius: 10, marginRight: 20, alignSelf: 'flex-end' }} >
                         <Text
                             style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}}
-                            {...this.props}
                             onPress = { (e) => this.props.nav('AddCoinController') }>
                             +
                         </Text>
