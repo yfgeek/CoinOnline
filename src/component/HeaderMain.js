@@ -4,6 +4,7 @@ import {
     Text, ImageBackground,Dimensions
 } from 'react-native'
 import {addCoin} from "../actions/actions";
+import Counter from "./Counter";
 
 let contentHeight = Dimensions.get('window').height-40;
 
@@ -14,7 +15,7 @@ class Header extends Component {
     }
 
 
-    renderEmpty(){
+    __renderEmpty(){
         return (
             <View>
                 <ImageBackground style={{
@@ -47,7 +48,7 @@ class Header extends Component {
 
         )
     }
-    renderAll() {
+    __renderAll() {
         return (
             <View>
             <ImageBackground style={{
@@ -62,9 +63,7 @@ class Header extends Component {
 
                 <View style={{flex: 4, marginTop:0, marginBottom: 15 ,overflow: 'hidden', justifyContent:'flex-end', flexDirection:'column',backgroundColor:'transparent'}}>
                     <Text style={{marginLeft: 30, marginRight: 2, alignSelf: 'flex-start',backgroundColor:'transparent' ,marginBottom: 3, marginTop: 3, color: '#fff', fontSize:32}}>
-                        £{
-                        this.props.balance.toFixed(2)
-                    }
+                        £<Counter value={this.props.balance.toFixed(2)} decimal={2} />
                     </Text>
                     <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={{marginLeft: 30, marginRight: 2, alignSelf: 'flex-end' ,alignItems:'flex-end',marginBottom: 3, marginTop: 3, color: '#fff', fontSize:15,fontWeight: '100'}}>
@@ -86,8 +85,8 @@ class Header extends Component {
     }
 
     render(){
-        if(this.props.balance<=0) return this.renderEmpty();
-        return this.renderAll();
+        if(this.props.balance<=0) return this.__renderEmpty();
+        return this.__renderAll();
     }
 }
 
