@@ -5,7 +5,7 @@ import {
 
 class Counter extends Component {
     static defaultProps = {
-        commas: false,
+        commas: true,
         timeout: 500,
         steps: 10,
         decimal: 2,
@@ -49,8 +49,7 @@ class Counter extends Component {
     }
 
     static commas(num) {
-
-        return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+        return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, ',');
     }
 
     render() {
