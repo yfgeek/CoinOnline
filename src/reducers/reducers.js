@@ -34,7 +34,7 @@ function balance(state = [], action){
                 ...state.slice(action.index + 1)
             ];
         default:
-            return state.filter((item)=>!item.deleted);
+            return state;
 
     }
 }
@@ -58,7 +58,6 @@ function coins(state = [], action) {
                 ...state.slice(action.index + 1)
             ];
         case DELETE_COIN:
-            console.warn(action.index);
             return [
                 ...state.slice(0, action.index),
                 Object.assign({}, state[action.index], {
@@ -67,7 +66,7 @@ function coins(state = [], action) {
                 ...state.slice(action.index + 1)
             ];
         default:
-            return state.filter((item)=>!item.deleted);
+            return state;
     }
 }
 

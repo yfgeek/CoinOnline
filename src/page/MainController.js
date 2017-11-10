@@ -54,7 +54,8 @@ class MainController extends Component {
                 <ScrollView style={{height: contentHeight, backgroundColor: '#f1f1f1'}}>
                     {
                         this.props.visibleCoins.map((item, index) =>{
-                            return <CoinItem cuy={item.text} numbers={item.numbers} key={index} itemIndex={index} />
+                            if (!item.deleted)
+                                return <CoinItem cuy={item.text} numbers={item.numbers} key={index} itemIndex={index} />
                         })
                     }
                 </ScrollView>
