@@ -21,11 +21,14 @@ class CoinIcon extends Component {
 
     render() {
         var url = this.getImage(this.props.cuy);
+        let w = this.props.width || 48;
+        let h = this.props.height || 48;
+        let m = this.props.marginLeft || 15;
         return (
                 <Image source={{uri:url}} style={{
-                        width: 48,
-                        height: 48,
-                        marginLeft: 15,
+                        width: w,
+                        height: h,
+                        marginLeft: m,
                 }} />
         )
     }

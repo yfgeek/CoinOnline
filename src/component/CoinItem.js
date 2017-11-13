@@ -59,9 +59,23 @@ class CoinList extends Component {
             .done();
     }
 
-    renderLoadingView() {
+    __renderLoadingView() {
+        let covert = this.props.cuy.toUpperCase().split("-");
         return (
-            <View />
+            <View>
+                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={(e) => this.deleteItem(this.props.itemIndex) } >
+                    <View style={styles.cell}>
+                        <CoinIcon style={styles.thumbnai} cuy={covert[0]}/>
+                        <View style={styles.rightContainer}>
+                            <Text style={{fontSize:17}} numberOfLines={2}>Loading</Text>
+                            <View style={{marginTop: 8, flex:1, flexDirection:'row', alignItems:'stretch', justifyContent: 'space-between'}}>
+                                <Text style={styles.label} numberOfLines={1}>{covert[1]}</Text>
+                                <Text style={styles.label}>{this.props.numbers} {covert[0]}</Text>
+                            </View>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+            </View>
         );
     }
     reverse(){
@@ -81,7 +95,7 @@ class CoinList extends Component {
     }
     render() {
         if (!this.state.loaded) {
-            return this.renderLoadingView();
+            return this.__renderLoadingView();
         }
 
         return (

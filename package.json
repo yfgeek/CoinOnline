@@ -15,13 +15,15 @@
 		"react-native-spinkit": "^1.1.1",
 		"react-native-svg": "^5.4.2",
 		"react-native-svg-uri": "^1.2.1",
+		"react-native-textinput-effects": "^0.4.1",
 		"react-native-ultimate-listview": "^3.2.4",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.15",
 		"react-redux": "^5.0.6",
 		"redux": "^3.7.2",
-		"remote-redux-devtools": "^0.5.12"
-	},
+		"remote-redux-devtools": "^0.5.12",
+      "react-native-keyboard-aware-scroll-view": "latest"
+    },
 	"devDependencies": {
 		"babel-jest": "21.2.0",
 		"babel-preset-react-native": "4.0.0",

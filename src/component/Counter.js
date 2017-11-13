@@ -49,7 +49,7 @@ class Counter extends Component {
     }
 
     static commas(num) {
-        return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, ',');
+        return (num || 0).toString().replace(/(?=(?!^)(?:\d{3})+(?:\.|$))(\d{3}(\.\d+$)?)/g, ',$1');
     }
 
     render() {
