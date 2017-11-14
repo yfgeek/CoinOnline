@@ -93,6 +93,11 @@ class CoinList extends Component {
         this.dispatch(deleteCoin(key));
         this.dispatch(deleteBalance(key));
     }
+    editItem(key){
+        this.props.nav('AddCoinController',{
+            id: key,
+        });
+    }
     render() {
         if (!this.state.loaded) {
             return this.__renderLoadingView();
@@ -100,7 +105,10 @@ class CoinList extends Component {
 
         return (
             <View>
-                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={(e) => this.deleteItem(this.props.itemIndex) } >
+                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={
+                    (e) => this.editItem(this.props.itemIndex)
+                    // (e) => this.deleteItem(this.props.itemIndex)
+                } >
                     <View style={styles.cell}>
                         <CoinIcon style={styles.thumbnai} cuy={this.state.dataSource.base} reversed={this.state.reversed}/>
                         <View style={styles.rightContainer}>

@@ -3,23 +3,19 @@ import {
     View,
     Text,
     ImageBackground,
-    Dimensions,
     TextInput,
     StyleSheet,
-    KeyboardAvoidingView,
 } from 'react-native'
 import {connect} from "react-redux";
-import {addCoin} from "../actions/actions";
+import {addCoin, editCoin} from "../actions/actions";
 import CoinIcon from "../component/CoinIcon";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import CoinCard from "../component/CoinCard";
 
-var contentHeight = Dimensions.get('window').height-500;
-var contentWidth = Dimensions.get('window').width;
 let _this = null;
 
 class AddCoinController extends Component {
 
-    static navigationOptions ={
+    static navigationOptions = (navigation) => ({
         // header : null,
         headerTitle: '添加虚拟货币',
         headerBackTitle: '返回',
@@ -39,16 +35,18 @@ class AddCoinController extends Component {
                     marginRight: 12,
                 }}
                    onPress={(e) => _this.addToCoin(e)}
-                >添加</Text>
+                >保存</Text>
             </View>
         ),
-    };
+    });
 
     constructor(props) {
         super(props);
+        let mode = this.props.mode|| 'ADD';
         this.state={
             numbers: 0,
             cuy: '',
+            mode: mode,
         };
     }
 
@@ -66,52 +64,7 @@ class AddCoinController extends Component {
         return(
             <View  onPress = {this._onPress}>
                 <ImageBackground style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
-                    {/*<View style={styles.title}>*/}
-                        {/*<Text style={styles.titleText}>添加数字货币</Text>*/}
-                    {/*</View>*/}
-                    <View style={styles.card}>
-                        <View style={{
-                            alignSelf: 'flex-end',
-                        }}>
-                            <CoinIcon style={styles.thumb} cuy="btc" width={38} height={38} marginLeft ={3} />
-                        </View>
-                        <View style={{
-                            marginBottom: 10,
-                        }}>
-                            <Text style={styles.cardTitle}>CARD NUMBER</Text>
-                            <Text style={{
-                                fontSize: 20,
-                                letterSpacing: 1,
-                                fontWeight: '600',
-                                backgroundColor: '#eeeeee',
-                                paddingTop: 8,
-                                paddingBottom: 8,
-                                paddingLeft: 16,
-                                paddingRight: 16,
-
-                            }}>···· ···· ···· ···· ···· ···· xmjw</Text>
-
-                        </View>
-
-                        <View style={{
-                            flexDirection: 'row',
-                            width: '100%',
-
-                        }}>
-                        <View style={{
-                            alignSelf: 'flex-start'
-                        }}>
-                            <Text style={styles.cardTitle}>CARD HOLDER</Text>
-                            <Text>Your Name</Text>
-                        </View>
-                        <View style={{
-                            alignSelf: 'flex-end'
-                        }}>
-                            <Text style={styles.cardTitle}>EXPIRATION DATE</Text>
-                            <Text>Never</Text>
-                        </View>
-                        </View>
-                    </View>
+                    <CoinCard />
                     <View style={styles.box}>
                         <View>
                         </View>
@@ -119,7 +72,7 @@ class AddCoinController extends Component {
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
                                 ref = "inputNumber"
-                                style={{height: 40, color: '#fff', fontSize: 48, borderColor: null, borderWidth: 0}}
+                                style={styles.inputNumber}
                                 onChangeText={(text) => this.setState({numbers: text})}
                                 keyboardType ='numeric'
                                 placeholder = '0.1'
@@ -134,14 +87,13 @@ class AddCoinController extends Component {
                                 <CoinIcon style={styles.thumb} cuy="eth" width={44} height={44} marginLeft ={10} />
                                 <CoinIcon style={styles.thumb} cuy="etc" width={44} height={44} marginLeft ={10} />
                                 <CoinIcon style={styles.thumb} cuy="xmr" width={44} height={44} marginLeft ={10} />
-
                             </View>
                         </View>
                         <View style={styles.forthLayer}>
                             <Text style={styles.label}>数字货币账户</Text>
                             <TextInput
                                 ref = "inputNumber"
-                                style={{height: 40, color: '#fff', fontSize: 25, borderColor: null, borderWidth: 0}}
+                                style={styles.inputDescription}
                                 placeholder = '1geekH9EiFeitKpigP8NKNJ6UaCUpxmjw'
                             />
                                 <View style={{ height: 60 }} />
@@ -178,6 +130,24 @@ class AddCoinController extends Component {
 
     }
 
+    doAction(e,data){
+        switch(e){
+            case 'EDIT':
+                this.editToCoin(data);
+                break;
+            case 'ADD':
+                this.addToCoin();
+                break;
+            default:
+                this.addToCoin();
+        }
+    }
+
+    editToCoin(data){
+        let {id,cuy,number,decription} = data;
+        dispatch(editCoin())
+    }
+
     addToCoin(e){
         const { dispatch } = this.props;
         let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
@@ -199,24 +169,6 @@ var styles = StyleSheet.create({
     box: {
         width: '100%',
         height:'60%',
-    },
-    card:{
-        bottom: '5%',
-        width: '90%',
-        height: 180,
-        padding: 15,
-        backgroundColor: '#f5f5f5',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        borderRadius: 7,
-        shadowColor: '#0d2959',
-        shadowOffset:{
-            width: 0,
-            height: 0,
-        },
-        shadowRadius: 2,
-        shadowOpacity: 0.3,
-
     },
     main: {
         backgroundColor: '#1987fb',
@@ -261,9 +213,7 @@ var styles = StyleSheet.create({
         fontWeight: '100',
         paddingBottom:15,
     },
-    thumb:{
-        marginRight: 5,
-    },
+
     icons: {
         flexDirection: 'row',
         marginBottom: 10,
@@ -284,13 +234,20 @@ var styles = StyleSheet.create({
         },
         shadowRadius: 2,
     },
-    cardTitle: {
-        color: '#8a8a8a',
-        fontSize: 12,
-        fontWeight: 'bold',
-        backgroundColor:'transparent',
-
-    }
+    inputNumber:{
+        height: 40,
+        color: '#fff',
+        fontSize: 48,
+        borderColor: null,
+        borderWidth: 0
+    },
+    inputDescription:{
+        height: 40,
+        color: '#ffffff',
+        fontSize: 25,
+        borderColor: null,
+        borderWidth: 0
+    },
 
 });
 

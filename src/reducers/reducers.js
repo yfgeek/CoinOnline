@@ -47,13 +47,16 @@ function coins(state = [], action) {
                 {
                     text: action.text,
                     numbers: action.numbers,
+                    description: action.description || "",
                 }
             ];
         case EDIT_COIN:
             return [
                 ...state.slice(0, action.index),
                 Object.assign({}, state[action.index], {
-                    completed: true
+                    text: action.text,
+                    numbers: action.numbers,
+
                 }),
                 ...state.slice(action.index + 1)
             ];
