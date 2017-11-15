@@ -43,11 +43,12 @@ class AddCoinController extends Component {
 
     constructor(props) {
         super(props);
-        const { id, cuy, numbers} = this.props.navigation.state.params;
+        const { id, cuy, numbers, description} = this.props.navigation.state.params;
         const mode = id <0 ? 'ADD' : 'EDIT';
         this.state={
             id : id,
             numbers: numbers,
+            description: description || '',
             cuy: cuy || 'btc',
             mode: mode,
         };
@@ -76,7 +77,6 @@ class AddCoinController extends Component {
                         <View style={styles.secondLayer}>
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
-                                ref = "inputNumber"
                                 style={styles.inputNumber}
                                 onChangeText={(text) => this.setState({numbers: text})}
                                 keyboardType ='numeric'
@@ -98,8 +98,9 @@ class AddCoinController extends Component {
                         <View style={styles.forthLayer}>
                             <Text style={styles.label}>数字货币账户</Text>
                             <TextInput
-                                ref = "inputNumber"
+                                onChangeText={(text) => this.setState({description: text})}
                                 style={styles.inputDescription}
+                                defaultValue = {this.state.description}
                                 placeholder = '1geekH9EiFeitKpigP8NKNJ6UaCUpxmjw'
                             />
                             <View style={{ height: 60 }} />
@@ -126,14 +127,18 @@ class AddCoinController extends Component {
 
     editToCoin(){
         const { dispatch } = this.props;
-        dispatch(editCoin(this.state.id, this.state.cuy, this.state.numbers));
+        dispatch(editCoin(this.state.id, this.state.cuy, this.state.numbers, this.state.description));
         this.props.navigation.goBack();
     }
 
     addToCoin(){
         const { dispatch } = this.props;
         let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
-        dispatch(addCoin(test[Math.floor(Math.random()*(test.length -1))],this.state.numbers));
+        dispatch(addCoin(
+            test[Math.floor(Math.random()*(test.length -1))],
+            this.state.numbers,
+            this.state.description
+        ));
         this.props.navigation.goBack();
     }
 }

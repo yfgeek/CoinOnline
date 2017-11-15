@@ -36,8 +36,8 @@ export function updateBalance(index, balance, cuy) {
 }
 
 
-export function addCoin(text, numbers) {
-    return { type: ADD_COIN, text, numbers }
+export function addCoin(text, numbers, description) {
+    return { type: ADD_COIN, text, numbers ,description }
 }
 
 export function deleteCoin(index) {
@@ -48,8 +48,8 @@ export function deleteBalance(index) {
     return { type: DELETE_BALANCE, index }
 }
 
-export function editCoin(index, text, numbers) {
-    return { type: EDIT_COIN, index, text, numbers }
+export function editCoin(index, text, numbers, description) {
+    return { type: EDIT_COIN, index, text, numbers, description }
 }
 
 export function showBalance() {

@@ -98,6 +98,7 @@ class CoinList extends Component {
             id: key,
             cuy: this.state.cuy.toLowerCase().split("-")[0],
             numbers: this.props.numbers,
+            description: this.props.description,
         });
     }
     render() {
