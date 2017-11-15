@@ -15,9 +15,10 @@ let _this = null;
 
 class AddCoinController extends Component {
 
-    static navigationOptions = (navigation) => ({
+    static navigationOptions = ({navigation}) => ({
+
         // header : null,
-        headerTitle: '添加虚拟货币',
+        headerTitle: navigation.state.params.id<0 ? '添加虚拟货币' : '修改虚拟货币' ,
         headerBackTitle: '返回',
         headerStyle:{
             backgroundColor: '#3a4172',
@@ -34,7 +35,7 @@ class AddCoinController extends Component {
                     color: '#ffffff',
                     marginRight: 12,
                 }}
-                   onPress={(e) => _this.addToCoin(e)}
+                   onPress={(e) => _this.doAction(_this.state.mode)}
                 >保存</Text>
             </View>
         ),
@@ -42,10 +43,12 @@ class AddCoinController extends Component {
 
     constructor(props) {
         super(props);
-        let mode = this.props.mode|| 'ADD';
+        const { id, cuy, numbers} = this.props.navigation.state.params;
+        const mode = id <0 ? 'ADD' : 'EDIT';
         this.state={
-            numbers: 0,
-            cuy: '',
+            id : id,
+            numbers: numbers,
+            cuy: cuy || 'btc',
             mode: mode,
         };
     }
@@ -62,9 +65,9 @@ class AddCoinController extends Component {
 
     render() {
         return(
-            <View  onPress = {this._onPress}>
+            <View onPress = {this._onPress}>
                 <ImageBackground style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
-                    <CoinCard />
+                    <CoinCard cuy={this.state.cuy}/>
                     <View style={styles.box}>
                         <View>
                         </View>
@@ -76,6 +79,7 @@ class AddCoinController extends Component {
                                 onChangeText={(text) => this.setState({numbers: text})}
                                 keyboardType ='numeric'
                                 placeholder = '0.1'
+                                defaultValue = {this.state.numbers}
                             />
 
                         </View>
@@ -96,44 +100,19 @@ class AddCoinController extends Component {
                                 style={styles.inputDescription}
                                 placeholder = '1geekH9EiFeitKpigP8NKNJ6UaCUpxmjw'
                             />
-                                <View style={{ height: 60 }} />
+                            <View style={{ height: 60 }} />
+                        </View>
                     </View>
-                    </View>
-                    {/*<View style={{*/}
-                        {/*flexDirection: 'row',*/}
-                        {/*position: 'absolute',*/}
-                        {/*alignSelf: 'center',*/}
-                        {/*bottom: 0,*/}
-                        {/*backgroundColor: 'transparent',*/}
-                        {/*justifyContent: 'center',*/}
-                    {/*}}>*/}
-                        {/*<View style={{*/}
-                            {/*borderRightColor: '#606295',*/}
-                            {/*borderRightWidth: 1,*/}
-                            {/*height: 70,*/}
-                            {/*justifyContent: 'center',*/}
-                            {/*paddingRight: 50,*/}
-                        {/*}}>*/}
-                            {/*<Text style={styles.titleText} onPress={(e) => this.addToCoin(e)}>添加</Text>*/}
-                        {/*</View>*/}
-                        {/*<View style={{*/}
-                            {/*height: 70,*/}
-                            {/*justifyContent: 'center',*/}
-                            {/*marginLeft: 50,*/}
-                        {/*}}>*/}
-                            {/*<Text style={styles.titleText} onPress={(e) =>         this.props.navigation.goBack()}>返回</Text>*/}
-                        {/*</View>*/}
-                    {/*</View>*/}
-          </ImageBackground>
+                </ImageBackground>
             </View>
-            )
-
+        )
     }
 
-    doAction(e,data){
+
+    doAction(e){
         switch(e){
             case 'EDIT':
-                this.editToCoin(data);
+                this.editToCoin();
                 break;
             case 'ADD':
                 this.addToCoin();
@@ -143,17 +122,17 @@ class AddCoinController extends Component {
         }
     }
 
-    editToCoin(data){
-        let {id,cuy,number,decription} = data;
-        dispatch(editCoin())
+    editToCoin(){
+        const { dispatch } = this.props;
+        dispatch(editCoin(this.state.id, this.state.cuy, this.state.numbers));
+        this.props.navigation.goBack();
     }
 
-    addToCoin(e){
+    addToCoin(){
         const { dispatch } = this.props;
         let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
         dispatch(addCoin(test[Math.floor(Math.random()*(test.length -1))],this.state.numbers));
         this.props.navigation.goBack();
-
     }
 }
 

@@ -31,9 +31,9 @@ class CoinList extends Component {
     }
 
     componentDidMount() {
-
         this.fetchData();
     }
+
 
     fetchData() {
         fetch("https://api.cryptonator.com/api/ticker/"+this.state.cuy, {
@@ -60,7 +60,7 @@ class CoinList extends Component {
     }
 
     __renderLoadingView() {
-        let covert = this.props.cuy.toUpperCase().split("-");
+        let covert = this.state.cuy.toUpperCase().split("-");
         return (
             <View>
                 <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={(e) => this.deleteItem(this.props.itemIndex) } >
@@ -96,18 +96,18 @@ class CoinList extends Component {
     editItem(key){
         this.props.nav('AddCoinController',{
             id: key,
+            cuy: this.state.cuy.toLowerCase().split("-")[0],
+            numbers: this.props.numbers,
         });
     }
     render() {
         if (!this.state.loaded) {
             return this.__renderLoadingView();
         }
-
         return (
             <View>
                 <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={
                     (e) => this.editItem(this.props.itemIndex)
-                    // (e) => this.deleteItem(this.props.itemIndex)
                 } >
                     <View style={styles.cell}>
                         <CoinIcon style={styles.thumbnai} cuy={this.state.dataSource.base} reversed={this.state.reversed}/>

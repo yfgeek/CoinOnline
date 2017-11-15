@@ -37,19 +37,6 @@ class MainController extends Component {
                 <Header
                     nav={ navigate }
                     balance={showbalance}
-                    // onAddCoin={ (cuy,balance) => {
-                    //     dispatch(addCoin(cuy, balance));
-                    //     // let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
-                    //     // for(let i=0; i<test.length;i++){
-                    //     //     ((num)=>{
-                    //     //         setTimeout(function(){
-                    //     //             let  price = Math.random().toFixed(2);
-                    //     //             dispatch(addCoin(test[num],price));
-                    //     //         }, 1000 * (i+1));
-                    //     //     })(i)
-                    //     // }
-                    //
-                    // }}
                 />
                 <ScrollView style={{height: contentHeight, backgroundColor: '#f1f1f1'}}>
                     {

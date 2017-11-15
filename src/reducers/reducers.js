@@ -56,7 +56,6 @@ function coins(state = [], action) {
                 Object.assign({}, state[action.index], {
                     text: action.text,
                     numbers: action.numbers,
-
                 }),
                 ...state.slice(action.index + 1)
             ];
