@@ -24,7 +24,7 @@ class CoinCard extends Component {
                     marginBottom: 20,
                 }}>
                     <Text style={styles.cardTitle}>CARD NUMBER</Text>
-                    <Text style={styles.cardNumber}>···· ···· ···· ···· ···· ···· xmjw</Text>
+                    <Text style={styles.cardNumber}>···· ···· ···· ···· ···· xmjw</Text>
 
                 </View>
 
@@ -54,10 +54,12 @@ class CoinCard extends Component {
 
 var styles = StyleSheet.create({
     card:{
-        bottom: '5%',
-        width: '90%',
-        height: 180,
-        padding: 15,
+        marginTop: 10,
+        marginBottom: 10,
+        paddingTop: 13,
+        paddingBottom: 13,
+        paddingLeft: 15,
+        paddingRight: 15,
         backgroundColor: '#f5f5f5',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',

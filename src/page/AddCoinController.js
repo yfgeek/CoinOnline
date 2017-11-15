@@ -67,7 +67,9 @@ class AddCoinController extends Component {
         return(
             <View onPress = {this._onPress}>
                 <ImageBackground style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
+                    <View style={styles.card}>
                     <CoinCard cuy={this.state.cuy}/>
+                    </View>
                     <View style={styles.box}>
                         <View>
                         </View>
@@ -86,11 +88,11 @@ class AddCoinController extends Component {
                         <View style={styles.thirdLayer}>
                             <Text style={styles.label}>数字货币类型 (*)</Text>
                             <View style={styles.icons}>
-                                <CoinIcon style={styles.thumb} cuy="btc" width={44} height={44} marginLeft ={3} />
-                                <CoinIcon style={styles.thumb} cuy="ltc" width={44} height={44} marginLeft ={10} />
-                                <CoinIcon style={styles.thumb} cuy="eth" width={44} height={44} marginLeft ={10} />
-                                <CoinIcon style={styles.thumb} cuy="etc" width={44} height={44} marginLeft ={10} />
-                                <CoinIcon style={styles.thumb} cuy="xmr" width={44} height={44} marginLeft ={10} />
+                                <CoinIcon style={styles.thumb} cuy="btc" width={42} height={42} marginLeft ={3} />
+                                <CoinIcon style={styles.thumb} cuy="ltc" width={42} height={42} marginLeft ={10} />
+                                <CoinIcon style={styles.thumb} cuy="eth" width={42} height={42} marginLeft ={10} />
+                                <CoinIcon style={styles.thumb} cuy="etc" width={42} height={42} marginLeft ={10} />
+                                <CoinIcon style={styles.thumb} cuy="xmr" width={42} height={42} marginLeft ={10} />
                             </View>
                         </View>
                         <View style={styles.forthLayer}>
@@ -149,11 +151,16 @@ var styles = StyleSheet.create({
         width: '100%',
         height:'60%',
     },
+    card:{
+        width: '90%',
+        height: '40%',
+        justifyContent: 'center',
+    },
     main: {
         backgroundColor: '#1987fb',
         width: '100%',
         height: '100%',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     secondLayer:{
