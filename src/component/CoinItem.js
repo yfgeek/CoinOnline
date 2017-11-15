@@ -63,7 +63,7 @@ class CoinList extends Component {
         let covert = this.state.cuy.toUpperCase().split("-");
         return (
             <View>
-                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={(e) => this.deleteItem(this.props.itemIndex) } >
+                <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={(e) => this.editItem(this.props.itemIndex) } >
                     <View style={styles.cell}>
                         <CoinIcon style={styles.thumbnai} cuy={covert[0]}/>
                         <View style={styles.rightContainer}>

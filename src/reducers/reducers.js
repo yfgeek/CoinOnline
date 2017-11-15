@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 import {
     ADD_COIN, EDIT_COIN, DELETE_COIN, VisibilityFilters, PUSH_BALANCE, SHOW_BALANCE,
-    DELETE_BALANCE
+    DELETE_BALANCE, UPDATE_BALANCE
 } from '../actions/actions'
 const { SHOW_ALL } = VisibilityFilters;
 
@@ -25,6 +25,15 @@ function balance(state = [], action){
         case SHOW_BALANCE:
             return 0;
             // return state.reduce((pre, value)=>pre + value);
+        case UPDATE_BALANCE:
+            return [
+                ...state.slice(0, action.index),
+                Object.assign({}, state[action.index], {
+                    balance: action.balance,
+                    deleted: false
+                }),
+                ...state.slice(action.index + 1)
+            ];
         case DELETE_BALANCE:
             return [
                 ...state.slice(0, action.index),
@@ -74,7 +83,6 @@ function coins(state = [], action) {
 }
 
 const todoApp = combineReducers({
-    visibilityFilter,
     coins: coins,
     allBalance: balance,
 });

@@ -25,14 +25,12 @@ export const VisibilityFilters = {
  * action 创建函数
  */
 
-export function pushBalance(balance, cuy) {
-    return { type: PUSH_BALANCE, balance , cuy}
+export function pushBalance(balance) {
+    return { type: PUSH_BALANCE, balance }
 }
 
-
-
-export function updateBalance(index, balance, cuy) {
-    return { type: UPDATE_BALANCE, index, balance , cuy}
+export function updateBalance(index, balance) {
+    return { type: UPDATE_BALANCE, index, balance }
 }
 
 

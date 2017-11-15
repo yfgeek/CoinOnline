@@ -5,11 +5,15 @@ import {
     ImageBackground,
     TextInput,
     StyleSheet,
+    KeyboardAvoidingView,
+    Dimensions,
 } from 'react-native'
 import {connect} from "react-redux";
 import {addCoin, editCoin} from "../actions/actions";
 import CoinIcon from "../component/CoinIcon";
 import CoinCard from "../component/CoinCard";
+
+const contentHeight = Dimensions.get('window').height - 50;
 
 let _this = null;
 
@@ -66,7 +70,7 @@ class AddCoinController extends Component {
 
     render() {
         return(
-            <View onPress = {this._onPress}>
+            <KeyboardAvoidingView onPress = {this._onPress} behavior="padding" keyboardVerticalOffset={280}>
                 <ImageBackground style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
                     <View style={styles.card}>
                     <CoinCard cuy={this.state.cuy}/>
@@ -74,6 +78,7 @@ class AddCoinController extends Component {
                     <View style={styles.box}>
                         <View>
                         </View>
+
                         <View style={styles.secondLayer}>
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
@@ -103,11 +108,12 @@ class AddCoinController extends Component {
                                 defaultValue = {this.state.description}
                                 placeholder = '1geekH9EiFeitKpigP8NKNJ6UaCUpxmjw'
                             />
-                            <View style={{ height: 60 }} />
                         </View>
+
+
                     </View>
                 </ImageBackground>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 
@@ -154,11 +160,11 @@ function select(state) {
 var styles = StyleSheet.create({
     box: {
         width: '100%',
-        height:'60%',
+        height:contentHeight*0.6,
     },
     card:{
         width: '90%',
-        height: '40%',
+        height: contentHeight*0.4,
         justifyContent: 'center',
     },
     main: {
