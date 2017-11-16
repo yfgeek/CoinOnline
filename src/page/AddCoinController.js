@@ -9,9 +9,9 @@ import {
     Dimensions,
 } from 'react-native'
 import {connect} from "react-redux";
-import {addCoin, editCoin} from "../actions/actions";
 import CoinIcon from "../component/CoinIcon";
 import CoinCard from "../component/CoinCard";
+import {addCoinMiddleware, editCoinMiddleware} from "../middleware/CustomMiddleware";
 
 const contentHeight = Dimensions.get('window').height - 50;
 
@@ -51,13 +51,12 @@ class AddCoinController extends Component {
         const mode = id <0 ? 'ADD' : 'EDIT';
         this.state={
             id : id,
-            numbers: numbers,
+            num: numbers,
             description: description || '',
             cuy: cuy || 'btc',
             mode: mode,
         };
     }
-
 
     componentDidMount() {
         _this = this;
@@ -70,8 +69,8 @@ class AddCoinController extends Component {
 
     render() {
         return(
-            <KeyboardAvoidingView onPress = {this._onPress} behavior="padding" keyboardVerticalOffset={280}>
-                <ImageBackground style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
+            <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={280}>
+                <ImageBackground onPress = {this._onPress}  style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
                     <View style={styles.card}>
                     <CoinCard cuy={this.state.cuy}/>
                     </View>
@@ -83,10 +82,10 @@ class AddCoinController extends Component {
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
                                 style={styles.inputNumber}
-                                onChangeText={(text) => this.setState({numbers: text})}
+                                onChangeText={(text) => this.setState({num: text})}
                                 keyboardType ='numeric'
                                 placeholder = '0.1'
-                                defaultValue = {this.state.numbers}
+                                defaultValue = {this.state.num}
                             />
 
                         </View>
@@ -109,8 +108,6 @@ class AddCoinController extends Component {
                                 placeholder = '1geekH9EiFeitKpigP8NKNJ6UaCUpxmjw'
                             />
                         </View>
-
-
                     </View>
                 </ImageBackground>
             </KeyboardAvoidingView>
@@ -131,22 +128,29 @@ class AddCoinController extends Component {
         }
     }
 
-    editToCoin(){
-        const { dispatch } = this.props;
-        dispatch(editCoin(this.state.id, this.state.cuy, this.state.numbers, this.state.description));
-        this.props.navigation.goBack();
-    }
-
     addToCoin(){
         const { dispatch } = this.props;
         let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
-        dispatch(addCoin(
-            test[Math.floor(Math.random()*(test.length -1))],
-            this.state.numbers,
-            this.state.description
+        dispatch(
+            addCoinMiddleware(
+                test[Math.floor(Math.random()*(test.length -1))],
+                parseFloat(this.state.num),
+                this.state.description
         ));
         this.props.navigation.goBack();
     }
+
+    editToCoin(){
+        const { dispatch } = this.props;
+            dispatch(editCoinMiddleware(
+                this.state.id,
+                this.state.cuy,
+                parseFloat(this.state.num),
+                this.state.description
+            ));
+        this.props.navigation.goBack();
+    }
+
 }
 
 function select(state) {

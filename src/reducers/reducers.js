@@ -12,41 +12,41 @@ function visibilityFilter(state = SHOW_ALL, action) {
             return state;
     }
 }
-
-function balance(state = [], action){
-    switch(action.type){
-        case PUSH_BALANCE:
-            return [...state,
-                 {
-                        balance: action.balance,
-                        deleted: false
-                }
-            ];
-        case SHOW_BALANCE:
-            return 0;
-            // return state.reduce((pre, value)=>pre + value);
-        case UPDATE_BALANCE:
-            return [
-                ...state.slice(0, action.index),
-                Object.assign({}, state[action.index], {
-                    balance: action.balance,
-                    deleted: false
-                }),
-                ...state.slice(action.index + 1)
-            ];
-        case DELETE_BALANCE:
-            return [
-                ...state.slice(0, action.index),
-                Object.assign({}, state[action.index], {
-                    deleted: true
-                }),
-                ...state.slice(action.index + 1)
-            ];
-        default:
-            return state;
-
-    }
-}
+//
+// function balance(state = [], action){
+//     switch(action.type){
+//         case PUSH_BALANCE:
+//             return [...state,
+//                  {
+//                         balance: action.balance,
+//                         deleted: false
+//                 }
+//             ];
+//         case SHOW_BALANCE:
+//             return 0;
+//             // return state.reduce((pre, value)=>pre + value);
+//         case UPDATE_BALANCE:
+//             return [
+//                 ...state.slice(0, action.index),
+//                 Object.assign({}, state[action.index], {
+//                     balance: action.balance,
+//                     deleted: false
+//                 }),
+//                 ...state.slice(action.index + 1)
+//             ];
+//         case DELETE_BALANCE:
+//             return [
+//                 ...state.slice(0, action.index),
+//                 Object.assign({}, state[action.index], {
+//                     deleted: true
+//                 }),
+//                 ...state.slice(action.index + 1)
+//             ];
+//         default:
+//             return state;
+//
+//     }
+// }
 
 function coins(state = [], action) {
     switch (action.type) {
@@ -56,7 +56,9 @@ function coins(state = [], action) {
                 {
                     text: action.text,
                     numbers: action.numbers,
+                    balance : action.balance,
                     description: action.description || "",
+                    deleted: false,
                 }
             ];
         case EDIT_COIN:
@@ -65,7 +67,9 @@ function coins(state = [], action) {
                 Object.assign({}, state[action.index], {
                     text: action.text,
                     numbers: action.numbers,
+                    balance : action.balance,
                     description: action.description,
+                    deleted: false,
                 }),
                 ...state.slice(action.index + 1)
             ];
@@ -84,7 +88,6 @@ function coins(state = [], action) {
 
 const todoApp = combineReducers({
     coins: coins,
-    allBalance: balance,
 });
 
 export default todoApp

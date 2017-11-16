@@ -22,7 +22,7 @@ class MainController extends Component {
     }
 
     getTotalBalance(){
-        let arr = [...this.props.visibleBalance];
+        let arr = [...this.props.visibleCoins];
         if(arr.length===0) return 0;
         let sum = arr.filter((item)=>!item.deleted).reduce((prev,current)=> prev + parseFloat(current['balance']),0);
         return sum;
@@ -30,19 +30,19 @@ class MainController extends Component {
     render() {
         const {navigate} = this.props.navigation;
         const {dispatch, visibleTodos, visibilityFilter } = this.props;
-        let showbalance =  this.getTotalBalance();
+        let totalBalance =  this.getTotalBalance();
         return (
             <View>
                 <StatusBar barStyle="light-content"/>
                 <Header
                     nav={ navigate }
-                    balance={showbalance}
+                    balance={totalBalance}
                 />
                 <ScrollView style={{height: contentHeight, backgroundColor: '#f1f1f1'}}>
                     {
                         this.props.visibleCoins.map((item, index) =>{
                             if (!item.deleted)
-                                return <CoinItem cuy={item.text} numbers={item.numbers} key={index} itemIndex={index} description={item.description} nav={navigate} />
+                                return <CoinItem cuy={item.text} numbers={item.numbers} key={index} itemIndex={index} balance={item.balance} description={item.description} nav={navigate} />
                         })
                     }
                 </ScrollView>

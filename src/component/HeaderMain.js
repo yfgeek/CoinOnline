@@ -39,6 +39,7 @@ class Header extends Component {
                                 style={{ lineHeight:12, color: '#fff', padding: 10, fontSize:14, fontWeight: '100'}}
                                 onPress = { (e) => this.props.nav('AddCoinController',{
                                     id: -1,
+                                    numbers: 0,
                                 }) }>
                                 点我添加
                             </Text>
@@ -76,6 +77,7 @@ class Header extends Component {
                             style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}}
                             onPress = { (e) => this.props.nav('AddCoinController',{
                                 id: -1,
+                                numbers: 0,
                             }) }>
                             +
                         </Text>
