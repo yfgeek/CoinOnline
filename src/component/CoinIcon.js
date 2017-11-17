@@ -1,7 +1,7 @@
 import React, { Component, } from 'react'
 import {
     View,
-    Image
+    Image, Touchable, TouchableHighlight, TouchableOpacity
 } from 'react-native'
 class CoinIcon extends Component {
 
@@ -24,12 +24,17 @@ class CoinIcon extends Component {
         let w = this.props.width || 48;
         let h = this.props.height || 48;
         let m = this.props.marginLeft || 15;
+        let r = this.props.marginRight || 0;
+        let e = this.props.event || null;
         return (
+            <TouchableOpacity onPress={e}>
                 <Image source={{uri:url}} style={{
                         width: w,
                         height: h,
                         marginLeft: m,
+                        marginRight: r,
                 }} />
+            </TouchableOpacity>
         )
     }
 }

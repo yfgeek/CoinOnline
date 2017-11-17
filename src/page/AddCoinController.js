@@ -6,7 +6,7 @@ import {
     TextInput,
     StyleSheet,
     KeyboardAvoidingView,
-    Dimensions,
+    Dimensions, TouchableOpacity,
 } from 'react-native'
 import {connect} from "react-redux";
 import CoinIcon from "../component/CoinIcon";
@@ -71,7 +71,7 @@ class AddCoinController extends Component {
     render() {
         return(
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={280}>
-                <ImageBackground onPress = {this._onPress}  style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
+                <ImageBackground  style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
                     <View style={styles.card}>
                     <CoinCard cuy={this.state.cuy}/>
                     </View>
@@ -79,7 +79,7 @@ class AddCoinController extends Component {
                         <View>
                         </View>
 
-                        <View style={styles.secondLayer}>
+                        <View style={styles.secondLayer} onPress = {this._onPress.bind(this)}>
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
                                 style={styles.inputNumber}
@@ -93,11 +93,20 @@ class AddCoinController extends Component {
                         <View style={styles.thirdLayer}>
                             <Text style={styles.label}>数字货币类型 (*)</Text>
                             <View style={styles.icons}>
-                                <CoinIcon style={styles.thumb} cuy="btc" width={42} height={42} marginLeft ={3} />
-                                <CoinIcon style={styles.thumb} cuy="ltc" width={42} height={42} marginLeft ={10} />
-                                <CoinIcon style={styles.thumb} cuy="eth" width={42} height={42} marginLeft ={10} />
-                                <CoinIcon style={styles.thumb} cuy="etc" width={42} height={42} marginLeft ={10} />
-                                <CoinIcon style={styles.thumb} cuy="xmr" width={42} height={42} marginLeft ={10} />
+                                {
+                                    ["btc","ltc","etc","xmr"].map(
+                                        (item, index)=>{
+                                            return  <CoinIcon key={index} style={styles.thumb} cuy={item} width={42} height={42} marginLeft ={3} marginRight ={5} event={(e)=>{
+                                                this.setState({
+                                                        cuy : item,
+                                                    }
+                                                );
+                                            }
+
+                                            } />
+                                        }
+                                    )
+                                }
                             </View>
                         </View>
                         <View style={styles.forthLayer}>
@@ -134,7 +143,7 @@ class AddCoinController extends Component {
         let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
         dispatch(
             addCoinMiddleware(
-                test[Math.floor(Math.random()*(test.length -1))],
+                this.state.cuy+'-gbp',
                 parseFloat(this.state.numbers),
                 this.state.description
         ));

@@ -27,9 +27,13 @@ class MainController extends Component {
         let sum = arr.filter((item)=>!item.deleted).reduce((prev,current)=> prev + parseFloat(current['balance']),0);
         return sum;
     }
+
+    componentDidMount() {
+        const {dispatch } = this.props;
+    }
+
     render() {
         const {navigate} = this.props.navigation;
-        const {dispatch, visibleTodos, visibilityFilter } = this.props;
         let totalBalance =  this.getTotalBalance();
         return (
             <View>
@@ -55,7 +59,7 @@ class MainController extends Component {
 function select(state) {
     return {
         visibleCoins: state.coins,
-        visibleBalance: state.allBalance,
+        visibleSettings: state.settings,
     }
 }
 export default connect(select)(MainController)

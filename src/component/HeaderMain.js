@@ -1,7 +1,8 @@
 import React, { Component, } from 'react'
 import {
     View,
-    Text, ImageBackground,Dimensions
+    Text, ImageBackground, Dimensions, TouchableOpacity, TouchableNativeFeedback, TouchableWithoutFeedback,
+    TouchableHighlight
 } from 'react-native'
 import {addCoin} from "../actions/actions";
 import Counter from "./Counter";
@@ -35,13 +36,14 @@ class Header extends Component {
                         </View>
 
                         <View style={{borderColor: '#ddd',backgroundColor:'transparent',borderWidth: 0.8, alignItems:'center', overflow: 'hidden', height: 32,width: 100, borderRadius: 5, alignSelf: 'center' }} >
+                            <TouchableOpacity  activeOpacity={0.6} onPress = { (e) => this.props.nav('AddCoinController',{
+                                id: -1,
+                            }) }>
                             <Text
-                                style={{ lineHeight:12, color: '#fff', padding: 10, fontSize:14, fontWeight: '100'}}
-                                onPress = { (e) => this.props.nav('AddCoinController',{
-                                    id: -1,
-                                }) }>
+                                style={{ lineHeight:12, color: '#fff', padding: 10, fontSize:14, fontWeight: '100'}} >
                                 点我添加
                             </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
 
@@ -72,13 +74,14 @@ class Header extends Component {
                         总资产(估计)
                     </Text>
                     <View style={{borderColor: '#ddd',backgroundColor:'transparent',borderWidth: 0.8, alignItems:'center', overflow: 'hidden', width: 32, height: 32,borderRadius: 10, marginRight: 20, alignSelf: 'flex-end' }} >
+                        <TouchableOpacity onPress = { (e) => this.props.nav('AddCoinController',{
+                            id: -1,
+                        }) }>
                         <Text
-                            style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}}
-                            onPress = { (e) => this.props.nav('AddCoinController',{
-                                id: -1,
-                            }) }>
+                            style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}} >
                             +
                         </Text>
+                        </TouchableOpacity>
                     </View>
                     </View>
                 </View>

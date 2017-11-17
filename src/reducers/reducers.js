@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 
 import {
-    ADD_COIN, EDIT_COIN, DELETE_COIN, VisibilityFilters, PUSH_BALANCE, SHOW_BALANCE,
-    DELETE_BALANCE, UPDATE_BALANCE
+    ADD_COIN, EDIT_COIN, DELETE_COIN, VisibilityFilters,
+    INITIAL_SETTING, UPDATE_SETTING, SHOW_SETTING
 } from '../actions/actions'
 const { SHOW_ALL } = VisibilityFilters;
 
@@ -12,41 +12,25 @@ function visibilityFilter(state = SHOW_ALL, action) {
             return state;
     }
 }
-//
-// function balance(state = [], action){
-//     switch(action.type){
-//         case PUSH_BALANCE:
-//             return [...state,
-//                  {
-//                         balance: action.balance,
-//                         deleted: false
-//                 }
-//             ];
-//         case SHOW_BALANCE:
-//             return 0;
-//             // return state.reduce((pre, value)=>pre + value);
-//         case UPDATE_BALANCE:
-//             return [
-//                 ...state.slice(0, action.index),
-//                 Object.assign({}, state[action.index], {
-//                     balance: action.balance,
-//                     deleted: false
-//                 }),
-//                 ...state.slice(action.index + 1)
-//             ];
-//         case DELETE_BALANCE:
-//             return [
-//                 ...state.slice(0, action.index),
-//                 Object.assign({}, state[action.index], {
-//                     deleted: true
-//                 }),
-//                 ...state.slice(action.index + 1)
-//             ];
-//         default:
-//             return state;
-//
-//     }
-// }
+
+function settings(state = {
+    'nation' : 'gbp',
+}, action){
+    switch(action.type){
+        // case INITIAL_SETTING:
+        //     return {
+        //         'nation' : 'gbp',
+        //     };
+        case UPDATE_SETTING:
+            return {
+                'nation' : action.nation,
+            };
+        case SHOW_SETTING:
+            return state;
+        default:
+            return state;
+    }
+}
 
 function coins(state = [], action) {
     switch (action.type) {
@@ -88,6 +72,7 @@ function coins(state = [], action) {
 
 const todoApp = combineReducers({
     coins: coins,
+    settings: settings,
 });
 
 export default todoApp
