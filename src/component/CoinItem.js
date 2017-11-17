@@ -47,7 +47,7 @@ class CoinList extends Component {
         this.props.nav('AddCoinController',{
             id: key,
             cuy: this.props.cuy.toLowerCase().split("-")[0],
-            numbers: parseFloat(this.props.numbers),
+            numbers: this.props.numbers,
             description: this.props.description,
         });
     }

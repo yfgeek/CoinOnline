@@ -47,11 +47,12 @@ class AddCoinController extends Component {
 
     constructor(props) {
         super(props);
-        const { id, cuy, numbers, description} = this.props.navigation.state.params;
+        let { id, cuy, numbers, description} = this.props.navigation.state.params;
+        if (numbers) numbers = numbers.toString();
         const mode = id <0 ? 'ADD' : 'EDIT';
         this.state={
             id : id,
-            num: numbers,
+            numbers: numbers || '',
             description: description || '',
             cuy: cuy || 'btc',
             mode: mode,
@@ -82,10 +83,10 @@ class AddCoinController extends Component {
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
                                 style={styles.inputNumber}
-                                onChangeText={(text) => this.setState({num: text})}
+                                onChangeText={(text) => this.setState({numbers: text})}
                                 keyboardType ='numeric'
                                 placeholder = '0.1'
-                                defaultValue = {this.state.num}
+                                defaultValue = {this.state.numbers}
                             />
 
                         </View>
@@ -134,7 +135,7 @@ class AddCoinController extends Component {
         dispatch(
             addCoinMiddleware(
                 test[Math.floor(Math.random()*(test.length -1))],
-                parseFloat(this.state.num),
+                parseFloat(this.state.numbers),
                 this.state.description
         ));
         this.props.navigation.goBack();
@@ -144,8 +145,8 @@ class AddCoinController extends Component {
         const { dispatch } = this.props;
             dispatch(editCoinMiddleware(
                 this.state.id,
-                this.state.cuy,
-                parseFloat(this.state.num),
+                this.state.cuy+'-gbp',
+                parseFloat(this.state.numbers),
                 this.state.description
             ));
         this.props.navigation.goBack();
