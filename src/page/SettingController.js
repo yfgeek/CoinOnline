@@ -5,7 +5,7 @@ import {
     Text,
     StatusBar,
     ScrollView,
-    Dimensions,
+    Dimensions, Image,
 } from 'react-native'
 
 import { List, ListItem } from 'react-native-elements'
@@ -18,7 +18,7 @@ class SettingController extends Component {
     static navigationOptions = ({navigation}) => ({
         headerTitle: '设置' ,
         headerStyle:{
-            backgroundColor: '#3a4172',
+            backgroundColor: '#3c82f7',
         },
         headerTitleStyle: {
             color: '#ffffff',
@@ -42,10 +42,16 @@ class SettingController extends Component {
         ];
         return (
             <View>
+                <ScrollView style={{height: contentHeight}}>
                 <View style={{
                     alignItems: 'center',
-                    marginTop: 50,
+                    marginTop: 20,
                 }}>
+                    <Image source={require('../images/logo.png')} resizeMode='contain' style={{
+                        width :128,
+                        height :128
+
+                    }} />
                     <Text style={{
                         fontSize: 20,
 
@@ -55,7 +61,6 @@ class SettingController extends Component {
                     }}>您的数字货币小助手</Text>
 
                 </View>
-                <ScrollView style={{height: contentHeight}}>
                     <List>
                         <ListItem
                             style ={ styles.list}

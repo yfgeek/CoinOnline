@@ -25,7 +25,7 @@ class AddCoinController extends Component {
         headerTitle: navigation.state.params.id<0 ? '添加虚拟货币' : '修改虚拟货币' ,
         headerBackTitle: '返回',
         headerStyle:{
-            backgroundColor: '#3a4172',
+            backgroundColor: '#244f85',
         },
         headerTitleStyle: {
             color: '#ffffff',
@@ -71,7 +71,7 @@ class AddCoinController extends Component {
     render() {
         return(
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={280}>
-                <ImageBackground  style={styles.main} source={require('../images/addBackground.jpg')} resizeMode='stretch' >
+                <ImageBackground  style={styles.main} resizeMode='stretch' >
                     <View style={styles.card}>
                     <CoinCard cuy={this.state.cuy}/>
                     </View>
@@ -182,7 +182,7 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
     },
     main: {
-        backgroundColor: '#1987fb',
+        backgroundColor: '#244f85',
         width: '100%',
         height: '100%',
         justifyContent: 'center',
