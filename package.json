@@ -12,6 +12,7 @@
 		"react": "16.0.0-beta.5",
 		"react-loading": "^1.0.1",
 		"react-native": "0.49.5",
+		"react-native-elements": "^0.18.2",
 		"react-native-keyboard-aware-scroll-view": "latest",
 		"react-native-scrollable-tab-view": "^0.8.0",
 		"react-native-spinkit": "^1.1.1",
