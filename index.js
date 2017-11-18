@@ -6,19 +6,36 @@ import {
 import { createStore ,applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import MyStackNavigation from "./src/navigation/MyStackNavigation";
-import App from './src/reducers/reducers'
+import reducers from './src/reducers/reducers'
 import devToolsEnhancer from 'remote-redux-devtools';
-import { addNavigationHelpers, NavigationActions } from "react-navigation";
 import thunk from 'redux-thunk';
+import {persistStore, persistCombineReducers} from 'redux-persist';
+import { PersistGate } from 'redux-persist/es/integration/react';
 
+import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
+const config = {
+    key: 'root',
+    storage,
+};
+
+function configureStore(){
+    let reducer = persistCombineReducers(config, reducers);
+    let store = createStore(reducer, compose(applyMiddleware(thunk),devToolsEnhancer({ realtime: true, port: 8000 })));
+    let persistor = persistStore(store);
+    return { persistor, store }
+}
 export default class CoinOnline extends Component {
     render() {
-        const store = createStore(App, compose(applyMiddleware(thunk),devToolsEnhancer({ realtime: true, port: 8000 })));
+        const { persistor, store } = configureStore();
         const {  nav } = this.props;
         return (
+
             <Provider store={store}>
-            <MyStackNavigation />
+                <PersistGate persistor={persistor}>
+                    <MyStackNavigation />
+                </PersistGate>
             </Provider>
+
         );
     }
 }

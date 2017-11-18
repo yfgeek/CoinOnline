@@ -68,8 +68,9 @@ class SettingController extends Component {
                             leftIcon={{name: 'public'}}
                         />
                         <ListItem
-                            switchButton
+                            switchButton = {true}
                             hideChevron
+                            switched
                             onSwitch={() => {}}
                             style ={ styles.list}
                             title= "持久模式"

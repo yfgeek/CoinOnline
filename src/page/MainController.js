@@ -58,8 +58,8 @@ class MainController extends Component {
 
 function select(state) {
     return {
-        visibleCoins: state.coins,
-        visibleSettings: state.settings,
+        visibleCoins: state.reducer.coins,
+        visibleSettings: state.reducer.settings,
     }
 }
 export default connect(select)(MainController)

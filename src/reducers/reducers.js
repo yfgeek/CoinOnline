@@ -24,6 +24,7 @@ function settings(state = {
         case UPDATE_SETTING:
             return {
                 'nation' : action.nation,
+                'storage' : action.storage
             };
         case SHOW_SETTING:
             return state;
@@ -42,7 +43,7 @@ function coins(state = [], action) {
                     numbers: action.numbers,
                     balance : action.balance,
                     description: action.description || "",
-                    deleted: false,
+                    deleted: false
                 }
             ];
         case EDIT_COIN:
@@ -53,7 +54,7 @@ function coins(state = [], action) {
                     numbers: action.numbers,
                     balance : action.balance,
                     description: action.description,
-                    deleted: false,
+                    deleted: false
                 }),
                 ...state.slice(action.index + 1)
             ];
@@ -70,9 +71,11 @@ function coins(state = [], action) {
     }
 }
 
-const todoApp = combineReducers({
+const reducers = combineReducers({
     coins: coins,
     settings: settings,
 });
 
-export default todoApp
+export default {
+    reducer: reducers
+};
