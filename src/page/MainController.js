@@ -6,10 +6,12 @@ import {
     ScrollView,
 } from 'react-native'
 import { connect } from 'react-redux'
+
 import {addCoin, deleteCoin, pushBalance, setVisibilityFilter, showBalance, VisibilityFilters} from '../actions/actions'
 
 import CoinItem from '../component/CoinItem'
 import Header from '../component/HeaderMain'
+import {editCoinMiddleware} from "../middleware/CustomMiddleware";
 
 var contentHeight = Dimensions.get('window').height-300;
 
@@ -30,6 +32,22 @@ class MainController extends Component {
 
     componentDidMount() {
         const {dispatch } = this.props;
+        this.refreshBalance()
+    }
+
+    refreshBalance(){
+        const {dispatch } = this.props;
+        // Update the balance to the new balance
+        this.props.visibleCoins.map((item, index) =>{
+            if (!item.deleted){
+                dispatch(editCoinMiddleware(
+                    index,
+                    item.text,
+                    item.numbers,
+                    item.description
+                ));
+            }
+        })
     }
 
     render() {
@@ -45,8 +63,9 @@ class MainController extends Component {
                 <ScrollView style={{height: contentHeight, backgroundColor: '#f1f1f1'}}>
                     {
                         this.props.visibleCoins.map((item, index) =>{
-                            if (!item.deleted)
+                            if (!item.deleted){
                                 return <CoinItem cuy={item.text} numbers={item.numbers} key={index} itemIndex={index} balance={item.balance} description={item.description} nav={navigate} />
+                            }
                         })
                     }
                 </ScrollView>

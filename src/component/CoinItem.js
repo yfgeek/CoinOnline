@@ -9,6 +9,7 @@ import {
 import CoinIcon from "./CoinIcon";
 import {deleteCoin} from "../actions/actions";
 import { connect } from 'react-redux';
+import Swipeout from 'react-native-swipeout';
 
 
 class CoinList extends Component {
@@ -40,7 +41,6 @@ class CoinList extends Component {
 
     deleteItem(key){
         this.dispatch(deleteCoin(key));
-        this.dispatch(deleteBalance(key));
     }
 
     editItem(key){
@@ -54,7 +54,20 @@ class CoinList extends Component {
 
     render() {
         let covert = this.props.cuy.toUpperCase().split("-");
+        let buttons = [
+            {
+                text: '编辑',
+                onPress : (e) => this.editItem(this.props.itemIndex),
+            },
+            {
+                text: '删除',
+                backgroundColor: '#fb3c38',
+                onPress : (e) => this.deleteItem(this.props.itemIndex),
+            },
+        ];
+
         return (
+            <Swipeout right={buttons}>
             <View>
                 <TouchableHighlight style={{backgroundColor: '#f9f9f9', marginTop:0, marginBottom:1 , height: 60}} underlayColor={'#ccc'} onPress={
                     (e) => this.editItem(this.props.itemIndex)
@@ -71,6 +84,7 @@ class CoinList extends Component {
                     </View>
                 </TouchableHighlight>
             </View>
+            </Swipeout>
 
         )
     }

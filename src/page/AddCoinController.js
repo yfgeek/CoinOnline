@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import CoinIcon from "../component/CoinIcon";
 import CoinCard from "../component/CoinCard";
 import {addCoinMiddleware, editCoinMiddleware} from "../middleware/CustomMiddleware";
+import {deleteCoin} from "../actions/actions";
 
 const contentHeight = Dimensions.get('window').height - 50;
 
@@ -161,12 +162,17 @@ class AddCoinController extends Component {
         this.props.navigation.goBack();
     }
 
+    deleteCoin(index){
+        const { dispatch } = this.props;
+        dispatch(deleteCoin(index));
+    }
+
 }
 
 function select(state) {
     return {
-        visibleCoins: state.coins,
-        visibleBalance: state.allBalance,
+        visibleCoins: state.reducer.coins,
+        visibleBalance: state.reducer.allBalance,
     }
 }
 
