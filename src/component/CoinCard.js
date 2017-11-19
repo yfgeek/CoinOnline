@@ -5,6 +5,7 @@ import {
     StyleSheet,
 } from 'react-native'
 import CoinIcon from "./CoinIcon";
+
 class CoinCard extends Component {
 
     constructor(props) {
@@ -13,6 +14,7 @@ class CoinCard extends Component {
 
     render() {
         let cuy = this.props.cuy || "btc";
+        let description = this.props.description.substr(this.props.description.length - 4) || "xmjw";
         return (
             <View style={styles.card}>
                 <View style={{
@@ -24,7 +26,7 @@ class CoinCard extends Component {
                     marginBottom: 20,
                 }}>
                     <Text style={styles.cardTitle}>CARD NUMBER</Text>
-                    <Text style={styles.cardNumber}>···· ···· ···· ···· ···· xmjw</Text>
+                    <Text style={styles.cardNumber}>···· ···· ···· ···· ···· {description}</Text>
 
                 </View>
 

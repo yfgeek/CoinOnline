@@ -28,16 +28,17 @@ class CoinList extends Component {
     componentDidMount() {
 
     }
-    reverse(){
-            this.setState({
-                              dataSource: {
-                                  base: this.state.dataSource.target,
-            target: this.state.dataSource.base,
-            price:  1 / this.state.dataSource.price,
-        },
-        reversed: true,
-        });
-    }
+
+    // reverse(){
+    //         this.setState({
+    //             dataSource: {
+    //                 base: this.state.dataSource.target,
+    //         target: this.state.dataSource.base,
+    //         price:  1 / this.state.dataSource.price,
+    //     },
+    //     reversed: true,
+    //     });
+    // }
 
     deleteItem(key){
         this.dispatch(deleteCoin(key));

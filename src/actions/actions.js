@@ -12,6 +12,10 @@ export const SHOW_SETTING = 'SHOW_SETTING';
 export const UPDATE_SETTING = 'UPDATE_SETTING';
 export const INITIAL_SETTING = 'INITIAL_SETTING';
 
+export const MODE_ADD = 'MODE_ADD';
+export const MODE_EDIT = 'MODE_EDIT';
+
+
 
 /*
  * 其它的常量

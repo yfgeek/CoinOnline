@@ -6,13 +6,15 @@ import {
     TextInput,
     StyleSheet,
     KeyboardAvoidingView,
-    Dimensions, TouchableOpacity,
+    Dimensions, TouchableOpacity, ScrollView,
 } from 'react-native'
 import {connect} from "react-redux";
 import CoinIcon from "../component/CoinIcon";
 import CoinCard from "../component/CoinCard";
 import {addCoinMiddleware, editCoinMiddleware} from "../middleware/CustomMiddleware";
-import {deleteCoin} from "../actions/actions";
+import {deleteCoin, MODE_ADD, MODE_EDIT} from "../actions/actions";
+import Modal from 'react-native-modalbox';
+import SelectCoinController from "./SelectCoinController";
 
 const contentHeight = Dimensions.get('window').height - 50;
 
@@ -50,13 +52,14 @@ class AddCoinController extends Component {
         super(props);
         let { id, cuy, numbers, description} = this.props.navigation.state.params;
         if (numbers) numbers = numbers.toString();
-        const mode = id <0 ? 'ADD' : 'EDIT';
+        const mode = id <0 ? MODE_ADD : MODE_EDIT;
         this.state={
             id : id,
             numbers: numbers || '',
             description: description || '',
             cuy: cuy || 'btc',
             mode: mode,
+            swipeToClose: true,
         };
     }
 
@@ -74,13 +77,13 @@ class AddCoinController extends Component {
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={280}>
                 <ImageBackground  style={styles.main} resizeMode='stretch' >
                     <View style={styles.card}>
-                    <CoinCard cuy={this.state.cuy}/>
+                    <CoinCard cuy={this.state.cuy} description = {this.state.description}/>
                     </View>
                     <View style={styles.box}>
                         <View>
                         </View>
 
-                        <View style={styles.secondLayer} onPress = {this._onPress.bind(this)}>
+                        <View style={styles.secondLayer} >
                             <Text style={styles.label}>拥有货币数量 (*)</Text>
                             <TextInput
                                 style={styles.inputNumber}
@@ -102,12 +105,12 @@ class AddCoinController extends Component {
                                                         cuy : item,
                                                     }
                                                 );
-                                            }
-
+                                                }
                                             } />
                                         }
                                     )
                                 }
+                                <CoinIcon style={styles.thumb} cuy="more" width={42} height={42} marginLeft ={3} marginRight ={5} event={() => this.refs.modal1.open()} />
                             </View>
                         </View>
                         <View style={styles.forthLayer}>
@@ -121,17 +124,25 @@ class AddCoinController extends Component {
                         </View>
                     </View>
                 </ImageBackground>
+                <Modal style={styles.modal} position={"bottom"} ref={"modal1"} swipeArea={20}>
+                    <ScrollView>
+                        <View style={{width: Dimensions.get('window').width}}>
+                            <SelectCoinController/>
+                        </View>
+                    </ScrollView>
+                </Modal>
             </KeyboardAvoidingView>
+
         )
     }
 
 
     doAction(e){
         switch(e){
-            case 'EDIT':
+            case MODE_EDIT:
                 this.editToCoin();
                 break;
-            case 'ADD':
+            case MODE_ADD:
                 this.addToCoin();
                 break;
             default:
@@ -264,6 +275,12 @@ var styles = StyleSheet.create({
         fontSize: 25,
         borderColor: null,
         borderWidth: 0
+    },
+    modal: {
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        height: '80%',
+        backgroundColor: "#f3f3f3",
     },
 
 });
