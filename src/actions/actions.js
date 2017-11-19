@@ -5,6 +5,8 @@
 export const ADD_COIN = 'ADD_COIN';
 export const DELETE_COIN = 'DELETE_COIN';
 export const EDIT_COIN = 'EDIT_COIN';
+export const REMOVE_ALL = 'REMOVE_ALL';
+
 
 export const SHOW_SETTING = 'SHOW_SETTING';
 export const UPDATE_SETTING = 'UPDATE_SETTING';
@@ -37,3 +39,6 @@ export function editCoin(index, text, numbers, balance, description) {
     return { type: EDIT_COIN, index, text, numbers, balance, description }
 }
 
+export function removeAllCoins() {
+    return { type: REMOVE_ALL }
+}

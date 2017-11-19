@@ -7,12 +7,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddCoinController from "../page/SelectCoinController";
 import MyStackNavigation from './MyStackNavigation';
 
-const RootTabs = TabNavigator({
+const RouteConfigs = {
     MainController: {
         screen: MainController,
-        navigationOptions: {
+            navigationOptions: {
             tabBarLabel: '主页',
-            tabBarIcon: ({ tintColor, focused }) => (
+                tabBarIcon: ({ tintColor, focused }) => (
                 <Ionicons
                     name={focused ? 'ios-home' : 'ios-home-outline'}
                     size={26}
@@ -23,9 +23,9 @@ const RootTabs = TabNavigator({
     },
     SettingController: {
         screen: SettingController,
-        navigationOptions: {
+            navigationOptions: {
             tabBarLabel: '设置',
-            tabBarIcon: ({ tintColor, focused }) => (
+                tabBarIcon: ({ tintColor, focused }) => (
                 <Ionicons
                     name={focused ? 'ios-settings' : 'ios-settings-outline'}
                     size={26}
@@ -34,5 +34,11 @@ const RootTabs = TabNavigator({
             ),
         },
     },
-});
+};
+const TabNavigatorConfig = {
+    swipeEnabled: false,
+};
+
+const RootTabs = TabNavigator(RouteConfigs,TabNavigatorConfig);
+
 export default RootTabs;

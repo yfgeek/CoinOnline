@@ -116,7 +116,7 @@ class AddCoinController extends Component {
                                 onChangeText={(text) => this.setState({description: text})}
                                 style={styles.inputDescription}
                                 defaultValue = {this.state.description}
-                                placeholder = '1geekH9EiFeitKpigP8NKNJ6UaCUpxmjw'
+                                placeholder = '1geekH9EiFeitKpigP8NKNJ6U...'
                             />
                         </View>
                     </View>
@@ -141,10 +141,9 @@ class AddCoinController extends Component {
 
     addToCoin(){
         const { dispatch } = this.props;
-        let test = ['btc-gbp','ada-gbp','bat-gbp','omg-gbp','zec-gbp','xmr-gbp','ark-gbp','ppc-gbp'];
         dispatch(
             addCoinMiddleware(
-                this.state.cuy+'-gbp',
+                this.state.cuy +'-' + this.props.visibleSettings.nation,
                 parseFloat(this.state.numbers),
                 this.state.description
         ));
@@ -155,7 +154,7 @@ class AddCoinController extends Component {
         const { dispatch } = this.props;
             dispatch(editCoinMiddleware(
                 this.state.id,
-                this.state.cuy+'-gbp',
+                this.state.cuy +'-' + this.props.visibleSettings.nation,
                 parseFloat(this.state.numbers),
                 this.state.description
             ));
@@ -172,7 +171,7 @@ class AddCoinController extends Component {
 function select(state) {
     return {
         visibleCoins: state.reducer.coins,
-        visibleBalance: state.reducer.allBalance,
+        visibleSettings: state.reducer.settings,
     }
 }
 
@@ -226,6 +225,7 @@ var styles = StyleSheet.create({
     },
     label:{
         fontSize: 12,
+        lineHeight: 12,
         color: '#bdc0d1',
         fontWeight: '100',
         paddingBottom:15,
@@ -252,14 +252,14 @@ var styles = StyleSheet.create({
         shadowRadius: 2,
     },
     inputNumber:{
-        height: 40,
+        lineHeight: 40,
         color: '#fff',
         fontSize: 48,
         borderColor: null,
         borderWidth: 0
     },
     inputDescription:{
-        height: 40,
+        lineHeight: 40,
         color: '#ffffff',
         fontSize: 25,
         borderColor: null,

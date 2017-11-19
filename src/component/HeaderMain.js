@@ -77,10 +77,15 @@ class Header extends Component {
                         <TouchableOpacity onPress = { (e) => this.props.nav('AddCoinController',{
                             id: -1,
                         }) }>
+                            <View style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: 30,
+                            }} >
                         <Text
-                            style={{ lineHeight:35, color: '#fff', fontSize:38, fontWeight: '100'}} >
-                            +
+                            style={{ color: '#fff', fontSize:28 , fontWeight: '100'}} >+
                         </Text>
+                    </View>
                         </TouchableOpacity>
                     </View>
                     </View>

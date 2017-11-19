@@ -11,7 +11,7 @@ import {addCoin, deleteCoin, pushBalance, setVisibilityFilter, showBalance, Visi
 
 import CoinItem from '../component/CoinItem'
 import Header from '../component/HeaderMain'
-import {editCoinMiddleware} from "../middleware/CustomMiddleware";
+import {editCoinMiddleware, updateCoinMiddleware} from "../middleware/CustomMiddleware";
 
 var contentHeight = Dimensions.get('window').height-300;
 
@@ -38,11 +38,12 @@ class MainController extends Component {
     refreshBalance(){
         const {dispatch } = this.props;
         // Update the balance to the new balance
+        // dispatch(updateCoinMiddleware(this.props.visibleCoins,'gbp'));
         this.props.visibleCoins.map((item, index) =>{
             if (!item.deleted){
                 dispatch(editCoinMiddleware(
                     index,
-                    item.text,
+                    item.text.split('-')[0] + '-' +this.props.visibleSettings.nation,
                     item.numbers,
                     item.description
                 ));

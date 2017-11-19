@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 import {
     ADD_COIN, EDIT_COIN, DELETE_COIN, VisibilityFilters,
-    INITIAL_SETTING, UPDATE_SETTING, SHOW_SETTING
+    INITIAL_SETTING, UPDATE_SETTING, SHOW_SETTING, REMOVE_ALL
 } from '../actions/actions'
 const { SHOW_ALL } = VisibilityFilters;
 
@@ -66,6 +66,9 @@ function coins(state = [], action) {
                 }),
                 ...state.slice(action.index + 1)
             ];
+        case REMOVE_ALL:
+            state = [];
+            return state;
         default:
             return state;
     }

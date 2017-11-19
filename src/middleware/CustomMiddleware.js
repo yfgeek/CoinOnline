@@ -18,3 +18,18 @@ export const editCoinMiddleware = (id, cuy, numbers, description) => (dispatch) 
         });
 };
 
+
+// export const updateCoinMiddleware = (allMap,nation) => (dispatch) => {
+//     let sequence = Promise.resolve();
+//     allMap.map((item,index)=>{
+//         sequence = sequence.then(function() {
+//             return fetch(`https://api.cryptonator.com/api/ticker/${item.text}-${nation}`)
+//                 .then(response => response.json())
+//                 .then(json => dispatch(editCoin( item.index, item.text+'-'+nation, item.numbers, parseFloat(item.numbers) * json.ticker.price, item.description)))
+//                 .catch((e)=>{
+//                     console.warn('网络错误')
+//                 });
+//         });
+//     });
+// };
+
