@@ -17,6 +17,7 @@ import Modal from 'react-native-modalbox';
 import SelectCoinController from "./SelectCoinController";
 
 const contentHeight = Dimensions.get('window').height - 50;
+const dismissKeyboard = require('dismissKeyboard');
 
 let _this = null;
 
@@ -76,7 +77,7 @@ class AddCoinController extends Component {
         return(
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={280}>
                 <ImageBackground  style={styles.main} resizeMode='stretch' >
-                    <View style={styles.card}>
+                    <View style={styles.card} onPress={()=>dismissKeyboard()}>
                     <CoinCard cuy={this.state.cuy} description = {this.state.description}/>
                     </View>
                     <View style={styles.box}>
@@ -100,17 +101,28 @@ class AddCoinController extends Component {
                                 {
                                     ["btc","ltc","etc","xmr"].map(
                                         (item, index)=>{
-                                            return  <CoinIcon key={index} style={styles.thumb} cuy={item} width={42} height={42} marginLeft ={3} marginRight ={5} event={(e)=>{
-                                                this.setState({
-                                                        cuy : item,
-                                                    }
-                                                );
+                                            return (
+                                                <TouchableOpacity key={index}  onPress={(e)=>{
+                                                    this.setState({
+                                                            cuy : item,
+                                                        }
+                                                    );
                                                 }
-                                            } />
+                                                } >
+                                                    <CoinIcon style={styles.thumb} cuy={item} width={42} height={42} marginLeft ={3} marginRight ={5}/>
+                                                </TouchableOpacity>
+                                                )
+
                                         }
                                     )
                                 }
-                                <CoinIcon style={styles.thumb} cuy="more" width={42} height={42} marginLeft ={3} marginRight ={5} event={() => this.refs.modal1.open()} />
+                                <TouchableOpacity onPress={(e)=>{
+                                    dismissKeyboard();
+                                    this.refs.modal1.open();
+                                }
+                                } >
+                                <CoinIcon style={styles.thumb} cuy="more" width={42} height={42} marginLeft ={3} marginRight ={5} />
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.forthLayer}>
@@ -127,7 +139,10 @@ class AddCoinController extends Component {
                 <Modal style={styles.modal} position={"bottom"} ref={"modal1"} swipeArea={20}>
                     <ScrollView>
                         <View style={{width: Dimensions.get('window').width}}>
-                            <SelectCoinController/>
+                            <SelectCoinController setCode={(cuy)=>(this.setState({
+                                    cuy : cuy,
+                            })
+                            )}/>
                         </View>
                     </ScrollView>
                 </Modal>
@@ -187,7 +202,7 @@ function select(state) {
 }
 
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     box: {
         width: '100%',
         height:contentHeight*0.6,
@@ -279,7 +294,7 @@ var styles = StyleSheet.create({
     modal: {
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        height: '80%',
+        height: '90%',
         backgroundColor: "#f3f3f3",
     },
 

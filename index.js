@@ -27,7 +27,6 @@ function configureStore(){
 export default class CoinOnline extends Component {
     render() {
         const { persistor, store } = configureStore();
-        const {  nav } = this.props;
         return (
 
             <Provider store={store}>

@@ -39,20 +39,20 @@ class CoinIcon extends Component {
         let w = this.props.width || 48;
         let m = this.props.marginLeft || 15;
         let r = this.props.marginRight || 0;
-        let e = this.props.event || null;
         return (
-            <TouchableOpacity onPress={e}>
                 <View style={{
                     alignItems:'center',
                     justifyContent:'center',
+                    borderRadius: w/2,
+                    backgroundColor : '#ffffff',
                     marginLeft: m,
+                    overflow: 'hidden',
                     marginRight: r,
                     height: w,
                     width: w,
                 }}>
                     {icon}
                 </View>
-            </TouchableOpacity>
         )
     }
 }

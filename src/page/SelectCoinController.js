@@ -55,9 +55,9 @@ class SelectCoinController extends Component {
     }
 
     renderRow (rowData,index) {
+            // let e = this.props.event || null;
             return (
-                <TouchableOpacity onPress = { (e) => {
-                } }>
+                <TouchableOpacity>
                 <ListItem
                     avatar={<CoinIcon
                         cuy = {rowData.code.toLowerCase()}
