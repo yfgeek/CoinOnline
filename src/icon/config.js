@@ -129,3 +129,5 @@ export const CoinList = [ { code: 'ADA', name: 'ADA' },
     { code: 'WAVES', name: 'WAVES' },
     { code: 'XTZ', name: 'XTZ' },
     { code: 'ZEC', name: 'Zcash' } ];
+
+export const list = ["0x" , "bcn" , "doge" , "gnt" , "miota" , "pivx" , "steem" , "xmr" , "ada" , "bnb" , "emc" , "hsr" , "mln" , "pot" , "strat" , "xrp" , "amp" , "btc" , "eos" , "icn" , "mona" , "ppc" , "trx" , "xtz" , "ant" , "btcd" , "etc" , "kmd" , "neo" , "ppt" , "usdt" , "zec" , "ardr" , "bts" , "eth" , "knc" , "nlg" , "qtum" , "vtc" , "ark" , "dash" , "fct" , "lkk" , "nmc" , "rep" , "waves" , "bat" , "dcr" , "game" , "lsk" , "nxt" , "salt" , "xcp" , "bcc" , "dgb" , "gbyte" , "ltc" , "omg" , "sc" , "xem" , "bch" , "dgd" , "gno" , "maid" , "pay" , "sngls" , "xlm", "more"];

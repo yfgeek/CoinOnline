@@ -1,17 +1,19 @@
-# 数字货币钱包
+# Cryptocurrency Wallet
 
 <img src="src/images/logo.png" width="256" />
 
-一个数字货币钱包APP，基于React Native + Redux，支持上百种数字货币，用户可以添加货币及金额，APP根据实时汇率计算出用户设置的货币单位的价格，同时支持iOS和Android客户端。
+This is a cryptocurrency wallet app for Android and iOS, supporting for hundreds of cryptocurrencies. [中文页面](README-CN.md)
 
-- [x] 支持添加数百种数字货币
-- [ ] 支持更改基准货币
-- [x] 实时API数据
-- [x] 数据持久化
+The wallet is based on React Native and Redux. The supporting features can be listed as below.
 
-目前还在开发中...兴趣使然，一个练手项目而已。
+- [x] Adding, editing or deleting hundreds of cryptocurrencies
+- [ ] Editing the base currency
+- [x] Real-Time cryptocurrency infromation ,fetching from API
+- [x] Data persistence
 
-# 截图
+More features are going to be designed and implemented.
+
+# Snapshot
 
 <img src="snap-1.png" width="350px" />
 

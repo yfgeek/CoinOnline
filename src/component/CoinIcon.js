@@ -1,17 +1,13 @@
 import React, { Component, } from 'react'
 import {
     View,
-    Image, Touchable, TouchableHighlight, TouchableOpacity
+    Image,
 } from 'react-native'
 
 import {createIconSetFromIcoMoon } from 'react-native-vector-icons';
-
 import selectionConfig from '../icon/selection.json';
-import {ColorConfig} from '../icon/config';
-
+import {ColorConfig,list} from '../icon/config';
 const Icon = createIconSetFromIcoMoon(selectionConfig);
-const list = ["0x" , "bcn" , "doge" , "gnt" , "miota" , "pivx" , "steem" , "xmr" , "ada" , "bnb" , "emc" , "hsr" , "mln" , "pot" , "strat" , "xrp" , "amp" , "btc" , "eos" , "icn" , "mona" , "ppc" , "trx" , "xtz" , "ant" , "btcd" , "etc" , "kmd" , "neo" , "ppt" , "usdt" , "zec" , "ardr" , "bts" , "eth" , "knc" , "nlg" , "qtum" , "vtc" , "ark" , "dash" , "fct" , "lkk" , "nmc" , "rep" , "waves" , "bat" , "dcr" , "game" , "lsk" , "nxt" , "salt" , "xcp" , "bcc" , "dgb" , "gbyte" , "ltc" , "omg" , "sc" , "xem" , "bch" , "dgd" , "gno" , "maid" , "pay" , "sngls" , "xlm", "more"];
-
 class CoinIcon extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +15,6 @@ class CoinIcon extends Component {
 
     getIcon(cuy){
         cuy = cuy.toLowerCase() || "btc";
-
         let w = this.props.width || 48;
         let h = this.props.height || 48;
 
