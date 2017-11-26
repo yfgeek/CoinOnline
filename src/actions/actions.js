@@ -15,14 +15,15 @@ export const INITIAL_SETTING = 'INITIAL_SETTING';
 export const MODE_ADD = 'MODE_ADD';
 export const MODE_EDIT = 'MODE_EDIT';
 
+
 /*
  * 其它的常量
  */
 
 export const VisibilityFilters = {
-    SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
-    SHOW_ACTIVE: 'SHOW_ACTIVE'
+  SHOW_ALL: 'SHOW_ALL',
+  SHOW_COMPLETED: 'SHOW_COMPLETED',
+  SHOW_ACTIVE: 'SHOW_ACTIVE',
 };
 
 /*
@@ -31,16 +32,20 @@ export const VisibilityFilters = {
 
 
 export function addCoin(text, numbers, balance, description) {
-    return { type: ADD_COIN, text, numbers ,balance ,description }
+  return {
+    type: ADD_COIN, text, numbers, balance, description,
+  };
 }
 
 export function deleteCoin(index) {
-    return { type: DELETE_COIN, index }
+  return { type: DELETE_COIN, index };
 }
 export function editCoin(index, text, numbers, balance, description) {
-    return { type: EDIT_COIN, index, text, numbers, balance, description }
+  return {
+    type: EDIT_COIN, index, text, numbers, balance, description,
+  };
 }
 
 export function removeAllCoins() {
-    return { type: REMOVE_ALL }
+  return { type: REMOVE_ALL };
 }

@@ -1,0 +1,36 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb-base",
+  "env": {
+    "jest": true
+  },
+  "plugins": [
+    "react",
+    "react-native"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "react/jsx-uses-vars": 2,
+    "react/jsx-uses-react": 2,
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "never"
+      }
+    ],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true
+      }
+    ]
+  },
+  "globals": {
+    "fetch": true
+  }
+}

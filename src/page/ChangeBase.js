@@ -21,11 +21,11 @@ const dismissKeyboard = require('dismissKeyboard');
 
 let _this = null;
 
-class AddCoinController extends Component {
+class ChangeBase extends Component {
     static navigationOptions = ({ navigation }) => ({
 
       // header : null,
-      headerTitle: navigation.state.params.id < 0 ? '添加虚拟货币' : '修改虚拟货币',
+      headerTitle: '修改基准货币',
       headerBackTitle: '返回',
       headerStyle: {
         backgroundColor: '#244f85'
@@ -184,7 +184,6 @@ class AddCoinController extends Component {
 
 function select(state) {
   return {
-    visibleCoins: state.reducer.coins,
     visibleSettings: state.reducer.settings
   };
 }
@@ -288,4 +287,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(select)(AddCoinController);
+export default connect(select)(ChangeBase);

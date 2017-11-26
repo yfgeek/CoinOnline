@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-    AppRegistry,
-} from 'react-native';
 import { StackNavigator  } from 'react-navigation';
 import AddCoinController from "../page/AddCoinController";
 import MainController from "../page/MainController";
