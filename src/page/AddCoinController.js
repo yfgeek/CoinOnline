@@ -68,11 +68,6 @@ class AddCoinController extends Component {
         _this = this;
     }
 
-    _onPress() {
-        console.warn("press");
-        this.refs.inputNumber.blur();
-    }
-
     render() {
         return(
             <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={280}>
@@ -139,7 +134,7 @@ class AddCoinController extends Component {
                 <Modal style={styles.modal} position={"bottom"} ref={"modal1"} swipeArea={20}>
                     <ScrollView>
                         <View style={{width: Dimensions.get('window').width}}>
-                            <SelectCoinController setCode={(cuy)=>(this.setState({
+                            <SelectCoinController abc="3333333" setCode={(cuy)=>(this.setState({
                                     cuy : cuy,
                             })
                             )}/>

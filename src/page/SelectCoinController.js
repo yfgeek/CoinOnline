@@ -9,6 +9,7 @@ import {
 import {ButtonGroup, List, ListItem} from 'react-native-elements'
 import CoinIcon from "../component/CoinIcon";
 import {CoinList} from "../icon/config"
+let _this = null;
 
 class SelectCoinController extends Component {
 
@@ -33,6 +34,7 @@ class SelectCoinController extends Component {
     }
 
     componentDidMount() {
+        _this = this;
         this.loadFromConfig();
     }
     loadFromAPI(){
@@ -54,10 +56,13 @@ class SelectCoinController extends Component {
         });
     }
 
+
     renderRow (rowData,index) {
             // let e = this.props.event || null;
             return (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    _this.props.setCode(rowData.code.toLowerCase());
+                }}>
                 <ListItem
                     avatar={<CoinIcon
                         cuy = {rowData.code.toLowerCase()}
