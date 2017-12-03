@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-native-modalbox';
 import {
   View,
   Text,
@@ -13,7 +14,6 @@ import CoinIcon from '../component/CoinIcon';
 import CoinCard from '../component/CoinCard';
 import { addCoinMiddleware, editCoinMiddleware } from '../middleware/CustomMiddleware';
 import { deleteCoin, MODE_ADD, MODE_EDIT } from '../actions/actions';
-import Modal from 'react-native-modalbox';
 import SelectCoinController from './SelectCoinController';
 
 const contentHeight = Dimensions.get('window').height - 50;

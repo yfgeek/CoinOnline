@@ -110,7 +110,7 @@ class SettingController extends Component {
     }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   list: {
   }
 
