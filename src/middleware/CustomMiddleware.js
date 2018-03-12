@@ -1,16 +1,24 @@
 import {addCoin, editCoin} from "../actions/actions";
 
 export const addCoinMiddleware = (cuy, numbers, description) => (dispatch) => {
-    return fetch(`https://api.cryptonator.com/api/ticker/${cuy}`)
-        .then(response => response.json())
+    return fetch(`https://api.cryptonator.com/api/ticker/${cuy}`,{
+        method: 'GET',
+        headers: new Headers(),
+        })
+        .then(response => {
+            return response.json();
+        })
         .then(json => dispatch(addCoin( cuy, numbers, parseFloat(numbers) * json.ticker.price, description)))
         .catch((e)=>{
-            console.warn('网络错误')
+            console.warn(`网络错误: ${e}`);
         });
 };
 
 export const editCoinMiddleware = (id, cuy, numbers, description) => (dispatch) => {
-    return fetch(`https://api.cryptonator.com/api/ticker/${cuy}`)
+    return fetch(`https://api.cryptonator.com/api/ticker/${cuy}`,{
+        method: 'GET',
+        headers: new Headers(),
+        })
         .then(response => response.json())
         .then(json => dispatch(editCoin( id, cuy, numbers, parseFloat(numbers) * json.ticker.price, description)))
         .catch((e)=>{

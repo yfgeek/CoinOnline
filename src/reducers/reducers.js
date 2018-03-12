@@ -14,7 +14,7 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 
 function settings(state = {
-  nation: 'gbp'
+  nation: 'usd'
 }, action) {
   switch (action.type) {
     // case INITIAL_SETTING:
